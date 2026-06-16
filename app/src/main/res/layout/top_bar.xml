@@ -33,8 +33,15 @@
             android:layout_height="40dp"
             android:gravity="center_vertical"
             android:inputType="text"
+            android:enabled="true"
+            android:focusable="true"
+            android:textSize="20sp"
+            android:textCursorDrawable="@drawable/cursor_green"
+            android:textColor="#3B3B3B"
+            android:focusableInTouchMode="true"
+            android:clickable="true"
             android:paddingLeft="10dp"
-            android:text="Search..." />
+            android:hint="Search..." />
 
         <ImageView
             android:id="@+id/mikeIcon"

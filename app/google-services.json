@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "749334937343",
+    "project_id": "myntraclone-d2cb5",
+    "storage_bucket": "myntraclone-d2cb5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749334937343:android:182aaf4cfacfecdf20d6ca",
+        "android_client_info": {
+          "package_name": "com.example.basics"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAem07V_vAS_UqhiRfuUY2DyCSx_S3fYEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
