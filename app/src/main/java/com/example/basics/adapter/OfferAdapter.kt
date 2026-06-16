@@ -1,0 +1,31 @@
+package com.example.basics.adapter
+
+import android.R
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.basics.model.OfferSmall
+import com.example.basics.databinding.OfferSmallBinding
+
+class OfferAdapter: ListAdapter<OfferSmall, OfferAdapter.ViewHolder>(OfferDiffCallBack()){
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = OfferSmallBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return ViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            holder.bind(getItem(position))
+    }
+
+    class ViewHolder(val binding: OfferSmallBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(offer: OfferSmall){
+//            binding.offerImg.setImageResource(R.drawable.perfume)
+            Glide.with(binding.root.context)
+                .load(offer.image)
+                .placeholder(R.color.darker_gray)
+                .into(binding.offerImg)
+        }
+    }
+}

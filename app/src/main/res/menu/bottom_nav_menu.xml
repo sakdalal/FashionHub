@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/myntra"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/tag"
+        android:icon="@drawable/tag"
+        android:title="Under ₹999" />
+
+    <item
+        android:id="@+id/fastshop"
+        android:icon="@drawable/stopwatch"
+        android:title="From 30 min" />
+
+    <item
+        android:id="@+id/luxe"
+        android:icon="@drawable/sparkle"
+        android:title="Luxury" />
+    <item
+        android:id="@+id/cart"
+        android:icon="@drawable/bag"
+        android:title="Bag" />
+
+</menu>
