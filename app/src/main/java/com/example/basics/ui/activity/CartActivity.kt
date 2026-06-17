@@ -23,6 +23,8 @@ import com.example.basics.db.CartEntity
 import com.example.basics.db.WishlistEntity
 import com.example.basics.viewmodel.CartViewModel
 import com.example.basics.viewmodel.CartViewModelFactory
+import com.example.basics.viewmodel.OrderViewModel
+import com.example.basics.viewmodel.OrderViewModelFactory
 import com.example.basics.viewmodel.WishlistViewModel
 import com.example.basics.viewmodel.WishlistViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -46,9 +48,17 @@ class CartActivity : AppCompatActivity() {
         val repository =
             (application as MyApplication).cartRepository
 
+        val orderRepository =
+            (application as MyApplication).orderRepository
+
+        val orderViewModel = ViewModelProvider(
+            this,
+            OrderViewModelFactory(orderRepository)
+        )[OrderViewModel::class.java]
+
         viewModel = ViewModelProvider(
             this,
-            CartViewModelFactory(repository)
+            CartViewModelFactory(repository,orderRepository)
         )[CartViewModel::class.java]
 
         adapter = CartAdapter { item ->
@@ -74,6 +84,7 @@ class CartActivity : AppCompatActivity() {
                         binding.platformFeeValue.visibility= View.GONE
                         binding.totalAmount.visibility= View.GONE
                         binding.totalAmountValue.visibility= View.GONE
+                        binding.placeOrder.visibility=View.GONE
                     } else {
                         binding.emptyCartLayout.root.visibility = View.GONE
                         binding.recyclerView.visibility = View.VISIBLE
@@ -95,6 +106,9 @@ class CartActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.placeOrder.setOnClickListener {
+            viewModel.placeOrder()
+        }
 
     }
 

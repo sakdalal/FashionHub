@@ -21,4 +21,10 @@ interface CartDao {
     @Query("SELECT EXISTS(SELECT * FROM cart WHERE id = :id)")
     suspend fun isAddedToCart(id: Int): Boolean
 
+    @Query("DELETE FROM cart")
+    suspend fun clearCart()
+
+    @Query("SELECT * FROM cart")
+    suspend fun getCartItemsList(): List<CartEntity>
+
 }

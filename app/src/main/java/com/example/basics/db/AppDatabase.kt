@@ -5,10 +5,13 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [WishlistEntity::class,
-               CartEntity::class],
-    version = 5
+               CartEntity::class,
+               OrderedEntity::class],
+    version = 6
 )
 abstract class AppDatabase: RoomDatabase() {
     abstract fun wishlistDao():WishlistDao
     abstract fun cartDao(): CartDao
+
+    abstract fun orderDao(): OrderDao
 }

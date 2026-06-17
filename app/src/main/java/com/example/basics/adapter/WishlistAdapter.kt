@@ -9,7 +9,9 @@ import com.example.basics.databinding.WishlistProductBinding
 import com.example.basics.db.WishlistEntity
 import com.example.basics.model.FeatureBrand
 
-class WishlistAdapter(private val onDeleteClick: (WishlistEntity) -> Unit,private val onMoveClick:(WishlistEntity)->Unit): ListAdapter<WishlistEntity, WishlistAdapter.MyViewHolder>(WishlistDiffCallBack()) {
+class WishlistAdapter(private val onDeleteClick: (WishlistEntity) -> Unit,
+                      private val onMoveClick:(WishlistEntity)->Unit): ListAdapter<WishlistEntity,
+        WishlistAdapter.MyViewHolder>(WishlistDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishlistAdapter.MyViewHolder {
         val binding = WishlistProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)

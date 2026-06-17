@@ -3,12 +3,10 @@ package com.example.basics.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.example.basics.repository.CartRepository
 import com.example.basics.repository.OrderRepository
 
-class CartViewModelFactory(private val cartRepository: CartRepository,private val orderRepository: OrderRepository) : ViewModelProvider.Factory {
-
+class OrderViewModelFactory(private val repository: OrderRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
-        return CartViewModel(cartRepository,orderRepository) as T
+        return OrderViewModel(repository) as T
     }
 }

@@ -1,0 +1,333 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profileSpace"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/profileName"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:gravity="center"
+                android:text="Hey Dean!"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/orderBox"
+                app:layout_constraintStart_toStartOf="@id/orderBox"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/orderBox"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/rectangular_border"
+                app:layout_constraintBottom_toTopOf="@id/manageAccountBox"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.75" />
+
+            <ImageView
+                android:id="@+id/orderImg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/boxicon"
+                app:layout_constraintBottom_toBottomOf="@id/orderBox"
+                app:layout_constraintStart_toStartOf="@id/orderBox"
+                app:layout_constraintTop_toTopOf="@id/orderBox"
+                app:tint="#696969" />
+
+            <TextView
+                android:id="@+id/orderText"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:text="Orders"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/orderBox"
+                app:layout_constraintStart_toEndOf="@id/orderImg"
+                app:layout_constraintTop_toTopOf="@id/orderBox" />
+
+            <ImageView
+                android:id="@+id/orderArrow"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/rightarrow"
+                app:layout_constraintBottom_toBottomOf="@id/orderBox"
+                app:layout_constraintEnd_toEndOf="@id/orderBox"
+                app:layout_constraintTop_toTopOf="@id/orderBox" />
+
+            <LinearLayout
+                android:id="@+id/manageAccountBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rectangular_border"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@id/wishlistBox"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/orderBox"
+                app:layout_constraintWidth_percent="0.75">
+
+                <!-- Header Row -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/manageHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:id="@+id/manageImg"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="15dp"
+                        android:src="@drawable/edit"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#696969" />
+
+                    <TextView
+                        android:id="@+id/manageText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp"
+                        android:gravity="center"
+                        android:text="Manage Account"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/manageImg"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/manageArrow"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/rightarrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/wishlistBox"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rectangular_border"
+                app:layout_constraintBottom_toTopOf="@id/divider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/manageAccountBox"
+                app:layout_constraintWidth_percent="0.75" />
+
+            <ImageView
+                android:id="@+id/wishlistImg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/boxicon"
+                app:layout_constraintBottom_toBottomOf="@id/wishlistBox"
+                app:layout_constraintStart_toStartOf="@id/wishlistBox"
+                app:layout_constraintTop_toTopOf="@id/wishlistBox"
+                app:tint="#696969" />
+
+            <TextView
+                android:id="@+id/wishlistText"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:text="Wishlist"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/wishlistBox"
+                app:layout_constraintStart_toEndOf="@id/wishlistImg"
+                app:layout_constraintTop_toTopOf="@id/wishlistBox" />
+
+            <ImageView
+                android:id="@+id/wishlistArrow"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/rightarrow"
+                app:layout_constraintBottom_toBottomOf="@id/wishlistBox"
+                app:layout_constraintEnd_toEndOf="@id/wishlistBox"
+                app:layout_constraintTop_toTopOf="@id/wishlistBox" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#DBDBDB"
+                app:layout_constraintBottom_toTopOf="@id/aboutSection"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/wishlistBox" />
+
+            <View
+                android:id="@+id/aboutSection"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/logoutSection"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider" />
+
+            <TextView
+                android:id="@+id/faq"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:text="FAQs"
+                android:textColor="#696969"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/aboutUs"
+                app:layout_constraintStart_toStartOf="@id/wishlistText"
+                app:layout_constraintTop_toTopOf="@id/aboutSection" />
+
+            <TextView
+                android:id="@+id/aboutUs"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:text="ABOUT US"
+                android:textColor="#696969"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/terms"
+                app:layout_constraintStart_toStartOf="@id/wishlistText"
+                app:layout_constraintTop_toBottomOf="@id/faq" />
+
+            <TextView
+                android:id="@+id/terms"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:text="TERMS OF USE"
+                android:textColor="#696969"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/privacyPolicy"
+                app:layout_constraintStart_toStartOf="@id/wishlistText"
+                app:layout_constraintTop_toBottomOf="@id/aboutUs" />
+
+            <TextView
+                android:id="@+id/privacyPolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:text="PRIVACY POLICY"
+                android:textColor="#696969"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/grievance"
+                app:layout_constraintStart_toStartOf="@id/wishlistText"
+                app:layout_constraintTop_toBottomOf="@id/terms" />
+
+            <TextView
+                android:id="@+id/grievance"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:text="GRIEVANCE REDRESSAL"
+                android:textColor="#696969"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/privacyCenter"
+                app:layout_constraintStart_toStartOf="@id/wishlistText"
+                app:layout_constraintTop_toBottomOf="@id/privacyPolicy" />
+
+            <TextView
+                android:id="@+id/privacyCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:text="PRIVACY CENTER"
+                android:textColor="#696969"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/foodSafety"
+                app:layout_constraintStart_toStartOf="@id/wishlistText"
+                app:layout_constraintTop_toBottomOf="@id/grievance" />
+
+            <TextView
+                android:id="@+id/foodSafety"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:text="FSSAI Food Safety Connect App"
+                android:textColor="#696969"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/wishlistText"
+                app:layout_constraintTop_toBottomOf="@id/privacyCenter" />
+
+            <View
+                android:id="@+id/logoutSection"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"
+                android:background="#DBDBDB"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/foodSafety" />
+
+            <TextView
+                android:id="@+id/logoutBtn"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/pink_border"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="LOG OUT"
+                android:textColor="#FF3F6C"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/logoutSection" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

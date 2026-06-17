@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.example.basics.db.AppDatabase
 import com.example.basics.repository.WishlistRepository
 import com.example.basics.repository.CartRepository
+import com.example.basics.repository.OrderRepository
+
 class MyApplication: Application() {
 
     val database by lazy{
@@ -23,6 +25,10 @@ class MyApplication: Application() {
 
     val cartRepository by lazy {
         CartRepository(database.cartDao())
+    }
+
+    val orderRepository by lazy {
+        OrderRepository(database.orderDao())
     }
 
 }

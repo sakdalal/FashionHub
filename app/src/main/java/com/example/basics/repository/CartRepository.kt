@@ -21,5 +21,12 @@ class CartRepository(private val dao: CartDao) {
         return dao.isAddedToCart(id)
     }
 
+    suspend fun getCartItemsList(): List<CartEntity> {
+        return dao.getCartItemsList()
+    }
+
+    suspend fun clearCart() {
+        dao.clearCart()
+    }
 
 }

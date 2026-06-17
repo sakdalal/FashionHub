@@ -53,6 +53,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.topBar.accountIcon.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
+
         binding.topBar.cameraIcon.setOnClickListener {
             if (
                 ContextCompat.checkSelfPermission(

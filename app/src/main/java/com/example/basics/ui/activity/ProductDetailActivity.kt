@@ -15,6 +15,8 @@ import com.example.basics.db.WishlistEntity
 import com.example.basics.model.FeatureBrand
 import com.example.basics.viewmodel.CartViewModel
 import com.example.basics.viewmodel.CartViewModelFactory
+import com.example.basics.viewmodel.OrderViewModel
+import com.example.basics.viewmodel.OrderViewModelFactory
 import com.example.basics.viewmodel.WishlistViewModel
 import com.example.basics.viewmodel.WishlistViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -58,12 +60,19 @@ class ProductDetailActivity : AppCompatActivity() {
             .load(product.thumbnail)
             .into(binding.productImage)
 
+        val orderRepository =
+            (application as MyApplication).orderRepository
+        val orderViewModel = ViewModelProvider(
+            this,
+            OrderViewModelFactory(orderRepository)
+        )[OrderViewModel::class.java]
+
 
         val repository =
             (application as MyApplication).cartRepository
         cartViewModel = ViewModelProvider(
             this,
-            CartViewModelFactory(repository)
+            CartViewModelFactory(repository,orderRepository)
         )[CartViewModel::class.java]
 
         val wishlistRepository =

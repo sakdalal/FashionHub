@@ -18,6 +18,8 @@ import com.example.basics.db.CartEntity
 import com.example.basics.db.WishlistEntity
 import com.example.basics.viewmodel.CartViewModel
 import com.example.basics.viewmodel.CartViewModelFactory
+import com.example.basics.viewmodel.OrderViewModel
+import com.example.basics.viewmodel.OrderViewModelFactory
 import com.example.basics.viewmodel.WishlistViewModel
 import com.example.basics.viewmodel.WishlistViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -67,8 +69,6 @@ class WishlistActivity : AppCompatActivity() {
                     binding.wishlistRecycler.visibility = View.VISIBLE
                     binding.emptyWishlistLayout.root.visibility = View.GONE
                 }
-
-                binding.itemsHead.text = "${items.size} items"
             }
         }
 
@@ -81,6 +81,7 @@ class WishlistActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
     }
 
 
@@ -88,9 +89,16 @@ class WishlistActivity : AppCompatActivity() {
 
         val repository = (application as MyApplication).cartRepository
 
+        val orderRepository =
+            (application as MyApplication).orderRepository
+        val orderViewModel = ViewModelProvider(
+            this,
+            OrderViewModelFactory(orderRepository)
+        )[OrderViewModel::class.java]
+
         val cartViewModel = ViewModelProvider(
             this,
-            CartViewModelFactory(repository)
+            CartViewModelFactory(repository,orderRepository)
         )[CartViewModel::class.java]
 
         val cartItem = CartEntity(
@@ -117,7 +125,6 @@ class WishlistActivity : AppCompatActivity() {
             dialog.dismiss()
         }
     }
-
 
 
 }
