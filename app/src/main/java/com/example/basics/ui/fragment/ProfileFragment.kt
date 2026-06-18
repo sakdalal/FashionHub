@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.example.basics.R
 import com.example.basics.databinding.FragmentProfileBinding
 import com.example.basics.model.User
+import com.example.basics.ui.activity.AddressActivity
 import com.example.basics.ui.activity.LoginActivity
 import com.example.basics.ui.activity.WishlistActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -71,6 +72,30 @@ class ProfileFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+
+        binding.manageArrow.setOnClickListener {
+            binding.manageArrowTwo.visibility= View.VISIBLE
+            binding.manageArrow.visibility= View.GONE
+            binding.manageExtra.root.visibility= View.VISIBLE
+        }
+
+        binding.manageArrowTwo.setOnClickListener {
+            binding.manageArrowTwo.visibility= View.GONE
+            binding.manageArrow.visibility= View.VISIBLE
+            binding.manageExtra.root.visibility= View.GONE
+        }
+
+        binding.manageExtra.accountDetailsBox.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, ManageAccountFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.manageExtra.addressBox.setOnClickListener {
+            startActivity(Intent(requireContext(), AddressActivity::class.java))
+        }
+
 
     }
 

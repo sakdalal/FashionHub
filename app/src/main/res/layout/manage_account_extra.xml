@@ -1,12 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     
     <View
+        android:id="@+id/accountDetailsBox"
+        android:layout_width="0dp"
+        android:layout_height="130dp"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/rectangular_border"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:id="@+id/accountIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/accountedit"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="@id/accountDetailsBox"
+        app:layout_constraintStart_toStartOf="@id/accountDetailsBox"
+        app:layout_constraintEnd_toEndOf="@id/accountDetailsBox"/>
+
+    <TextView
+        android:id="@+id/accountText"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        app:layout_constrainedWidth="0.25"/>
+        android:layout_height="wrap_content"
+        android:text="Account Details"
+        android:textSize="12sp"
+        android:textColor="#696969"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/accountIcon"
+        app:layout_constraintStart_toStartOf="@id/accountDetailsBox"
+        app:layout_constraintEnd_toEndOf="@id/accountDetailsBox"
+        app:layout_constraintBottom_toBottomOf="@id/accountDetailsBox"/>
+
+    <View
+        android:id="@+id/addressBox"
+        android:layout_width="0dp"
+        android:layout_height="130dp"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/rectangular_border"
+        app:layout_constraintStart_toEndOf="@id/accountDetailsBox"/>
+
+    <ImageView
+        android:id="@+id/addressIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/locationedit"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="@id/addressBox"
+        app:layout_constraintStart_toStartOf="@id/addressBox"
+        app:layout_constraintEnd_toEndOf="@id/addressBox"/>
+
+    <TextView
+        android:id="@+id/addressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        android:textSize="12sp"
+        android:textColor="#696969"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/addressIcon"
+        app:layout_constraintStart_toStartOf="@id/addressBox"
+        app:layout_constraintEnd_toEndOf="@id/addressBox"
+        app:layout_constraintBottom_toBottomOf="@id/addressBox"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

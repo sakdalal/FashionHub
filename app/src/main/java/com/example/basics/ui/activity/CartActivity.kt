@@ -21,6 +21,8 @@ import com.example.basics.databinding.ActivityCartBinding
 import com.example.basics.databinding.RemoveFromBagBinding
 import com.example.basics.db.CartEntity
 import com.example.basics.db.WishlistEntity
+import com.example.basics.viewmodel.AddressViewModel
+import com.example.basics.viewmodel.AddressViewModelFactory
 import com.example.basics.viewmodel.CartViewModel
 import com.example.basics.viewmodel.CartViewModelFactory
 import com.example.basics.viewmodel.OrderViewModel
@@ -28,6 +30,7 @@ import com.example.basics.viewmodel.OrderViewModelFactory
 import com.example.basics.viewmodel.WishlistViewModel
 import com.example.basics.viewmodel.WishlistViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 
@@ -40,7 +43,7 @@ class CartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         binding = ActivityCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
         WindowCompat.setDecorFitsSystemWindows(window, true)
@@ -51,15 +54,28 @@ class CartActivity : AppCompatActivity() {
         val orderRepository =
             (application as MyApplication).orderRepository
 
-        val orderViewModel = ViewModelProvider(
-            this,
-            OrderViewModelFactory(orderRepository)
-        )[OrderViewModel::class.java]
+        val addressRepository =(application as MyApplication).addressRepository
 
         viewModel = ViewModelProvider(
             this,
             CartViewModelFactory(repository,orderRepository)
         )[CartViewModel::class.java]
+
+        val orderViewModel = ViewModelProvider(
+            this,
+            OrderViewModelFactory(orderRepository)
+        )[OrderViewModel::class.java]
+
+        val addressViewModel = ViewModelProvider(
+            this,
+            AddressViewModelFactory(addressRepository)
+        )[AddressViewModel::class.java]
+
+
+
+
+
+
 
         adapter = CartAdapter { item ->
             showBottomSheet(item)
@@ -107,7 +123,41 @@ class CartActivity : AppCompatActivity() {
         }
 
         binding.placeOrder.setOnClickListener {
-            viewModel.placeOrder()
+
+            lifecycleScope.launch {
+
+                val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+
+                val defaultAddress =
+                    addressViewModel.getDefaultAddress(userId)
+
+                if (defaultAddress == null) {
+
+                    startActivity(
+                        Intent(
+                            this@CartActivity,
+                            AddressActivity::class.java
+                        )
+                    )
+
+                    return@launch
+                }
+                viewModel.placeOrder()
+
+                binding.placeOrderText.visibility = View.VISIBLE
+                binding.orderPlacedBox.visibility= View.VISIBLE
+                binding.orderPlacedIcon.visibility= View.VISIBLE
+
+                binding.root.postDelayed({
+                    binding.placeOrderText.visibility = View.GONE
+                    binding.orderPlacedBox.visibility= View.GONE
+                    binding.orderPlacedIcon.visibility= View.GONE
+                }, 1000)
+
+
+            }
+
+
         }
 
     }

@@ -7,9 +7,10 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "ordered")
 data class OrderedEntity (
 
-    @PrimaryKey
-    val id:Int,
+    @PrimaryKey(autoGenerate = true)
+    val id:Int=0,
 
+    val productId:Int,
     val rating:String,
     val brand:String?,
     val title:String,
@@ -17,6 +18,9 @@ data class OrderedEntity (
     val discountPercentage:String,
     val returnPolicy: String,
     val orderId: String,
-    val thumbnail:String
+    val thumbnail:String,
+    val userId: String,
+    val date:String
+
 
 )

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.basics.db.CartEntity
 import com.example.basics.db.OrderedEntity
 import com.example.basics.repository.OrderRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class OrderViewModel(private val repository: OrderRepository): ViewModel() {
@@ -20,6 +21,10 @@ class OrderViewModel(private val repository: OrderRepository): ViewModel() {
         viewModelScope.launch {
             repository.removeFromOrder(id)
         }
+    }
+
+    fun getOrdersByUserId(userId: String): Flow<List<OrderedEntity>> {
+        return repository.getOrdersByUserId(userId)
     }
 
 }

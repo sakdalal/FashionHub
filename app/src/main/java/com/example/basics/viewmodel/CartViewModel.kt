@@ -6,7 +6,11 @@ import com.example.basics.db.CartEntity
 import com.example.basics.db.OrderedEntity
 import com.example.basics.repository.CartRepository
 import com.example.basics.repository.OrderRepository
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class CartViewModel(private val repository: CartRepository,private val orderRepository: OrderRepository): ViewModel() {
 
@@ -37,12 +41,21 @@ class CartViewModel(private val repository: CartRepository,private val orderRepo
 
             if (cartItems.isEmpty()) return@launch
 
+
+            val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+
+            val currentDate = SimpleDateFormat(
+                "dd MMMM yyyy",
+                Locale.getDefault()
+            ).format(Date())
+
             val orderId = "ORD-${System.currentTimeMillis()}"
 
             val orderedItems = cartItems.map {
 
                 OrderedEntity(
-                    id = it.id,
+                    id = 0,
+                    productId=it.id,
                     rating = it.rating,
                     brand = it.brand,
                     title = it.title,
@@ -50,7 +63,9 @@ class CartViewModel(private val repository: CartRepository,private val orderRepo
                     discountPercentage = it.discountPercentage,
                     returnPolicy = it.returnPolicy,
                     thumbnail = it.thumbnail,
-                    orderId = orderId
+                    orderId = orderId,
+                    userId = userId,
+                    date = currentDate
                 )
             }
 

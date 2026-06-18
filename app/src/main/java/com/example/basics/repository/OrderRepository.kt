@@ -3,6 +3,7 @@ package com.example.basics.repository
 import com.example.basics.db.CartEntity
 import com.example.basics.db.OrderDao
 import com.example.basics.db.OrderedEntity
+import kotlinx.coroutines.flow.Flow
 
 class OrderRepository(private val dao: OrderDao) {
     suspend fun addToOrder(item: OrderedEntity) {
@@ -30,5 +31,9 @@ class OrderRepository(private val dao: OrderDao) {
 
     suspend fun getItemsByOrderId(orderId: String): List<OrderedEntity> {
         return dao.getItemsByOrderId(orderId)
+    }
+
+    fun getOrdersByUserId(userId: String): Flow<List<OrderedEntity>> {
+        return dao.getOrdersByUserId(userId)
     }
 }

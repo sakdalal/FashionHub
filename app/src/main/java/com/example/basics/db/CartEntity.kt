@@ -6,7 +6,7 @@ import java.security.Policy
 
 @Entity(tableName = "cart")
 data class CartEntity (
-    @PrimaryKey
+    @PrimaryKey()
     val id:Int,
 
     val rating:String,

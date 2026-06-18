@@ -19,6 +19,7 @@ import com.example.basics.databinding.ActivityCartBinding
 import com.example.basics.databinding.FragmentOrderBinding
 import com.example.basics.viewmodel.OrderViewModel
 import com.example.basics.viewmodel.OrderViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 class OrderFragment : Fragment() {
@@ -66,8 +67,10 @@ class OrderFragment : Fragment() {
                 .commit()
         }
 
+        val userId =
+            FirebaseAuth.getInstance().currentUser?.uid ?: ""
         lifecycleScope.launch {
-            viewModel.orderItems.collect { items ->
+            viewModel.getOrdersByUserId(userId).collect { items ->
 
                 items.forEach {
                     android.util.Log.d(
@@ -83,8 +86,9 @@ class OrderFragment : Fragment() {
         binding.orderRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.orderRecycler.adapter = adapter
 
+
         lifecycleScope.launch {
-            viewModel.orderItems.collect { items ->
+            viewModel.getOrdersByUserId(userId).collect{ items ->
                 adapter.submitList(items)
 
                 Log.d("ORDER_SIZE", "Size = ${items.size}")

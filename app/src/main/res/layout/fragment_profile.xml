@@ -18,7 +18,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/profileName"
@@ -40,7 +40,6 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/rectangular_border"
-                app:layout_constraintBottom_toTopOf="@id/manageAccountBox"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.75" />
@@ -88,7 +87,6 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/rectangular_border"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@id/wishlistBox"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/orderBox"
                 app:layout_constraintWidth_percent="0.75">
@@ -129,12 +127,33 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginEnd="15dp"
-                        android:src="@drawable/rightarrow"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:src="@drawable/downarrow"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@id/manageHeader"/>
+
+                    <ImageView
+                        android:id="@+id/manageArrowTwo"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/uparrow"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@id/manageHeader"
+                        android:visibility="gone"/>
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <include
+                    android:id="@+id/manageExtra"
+                    layout="@layout/manage_account_extra"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 
@@ -146,7 +165,6 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/rectangular_border"
-                app:layout_constraintBottom_toTopOf="@id/divider"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/manageAccountBox"
                 app:layout_constraintWidth_percent="0.75" />
@@ -192,7 +210,6 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
                 android:background="#DBDBDB"
-                app:layout_constraintBottom_toTopOf="@id/aboutSection"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/wishlistBox" />
@@ -201,7 +218,6 @@
                 android:id="@+id/aboutSection"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/logoutSection"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider" />
@@ -323,6 +339,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/logoutSection" />
+
+
+
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

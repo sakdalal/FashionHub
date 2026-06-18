@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green">#6FCF97</color>
+    <color name="default_stroke">#C4C4C4</color>
+    <color name="focus_stroke">#6FCF97</color>
+    <color name="error_stroke">#F44336</color>
 </resources>

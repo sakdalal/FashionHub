@@ -1,6 +1,7 @@
 package com.example.basics.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,9 @@ import com.bumptech.glide.Glide
 import com.example.basics.MyApplication
 import com.example.basics.R
 import com.example.basics.databinding.FragmentItemHistoryBinding
+import com.example.basics.model.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import kotlin.text.replace
 
@@ -55,6 +59,7 @@ class ItemHistoryFragment : Fragment() {
                 binding.priceText.text = it.price
                 binding.orderIdText.text=it.orderId
                 binding.orderIdValue.text=it.orderId
+                binding.orderOnValue.text=it.date
 
                 Glide.with(requireContext())
                     .load(it.thumbnail)
@@ -68,6 +73,23 @@ class ItemHistoryFragment : Fragment() {
             }
 
             binding.totalPriceValue.text="$${totalPrice}"
+
+
+            val uid = FirebaseAuth.getInstance().currentUser!!.uid
+
+            FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(uid)
+                .get()
+                .addOnSuccessListener {
+                    val user = it.toObject(User::class.java)
+                    Log.d("ACCOUNT", "User Name: ${user?.name}")
+                    binding.callValue.text=user?.phone
+                    binding.emailValue.text=user?.email
+                }
+                .addOnFailureListener {
+                    Log.e("ACCOUNT", "Error", it)
+                }
         }
 
     }

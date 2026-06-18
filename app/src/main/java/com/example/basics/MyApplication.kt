@@ -6,6 +6,7 @@ import com.example.basics.db.AppDatabase
 import com.example.basics.repository.WishlistRepository
 import com.example.basics.repository.CartRepository
 import com.example.basics.repository.OrderRepository
+import com.example.basics.repository.AddressRepository
 
 class MyApplication: Application() {
 
@@ -29,6 +30,10 @@ class MyApplication: Application() {
 
     val orderRepository by lazy {
         OrderRepository(database.orderDao())
+    }
+
+    val addressRepository by lazy {
+        AddressRepository(database.addressDao())
     }
 
 }

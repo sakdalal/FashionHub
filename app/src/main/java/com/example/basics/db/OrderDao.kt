@@ -31,4 +31,11 @@ interface OrderDao {
     @Query("SELECT * FROM ordered WHERE orderId = :orderId")
     suspend fun getItemsByOrderId(orderId: String): List<OrderedEntity>
 
+    @Query("""
+    SELECT * FROM ordered
+    WHERE userId = :userId
+    ORDER BY orderId DESC
+""")
+    fun getOrdersByUserId(userId: String): Flow<List<OrderedEntity>>
+
 }

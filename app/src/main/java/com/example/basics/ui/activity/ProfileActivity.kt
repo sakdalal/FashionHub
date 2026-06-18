@@ -12,6 +12,7 @@ import com.example.basics.databinding.ActivityCartBinding
 import com.example.basics.databinding.ActivityProfileBinding
 import com.example.basics.model.User
 import com.example.basics.ui.fragment.ItemHistoryFragment
+import com.example.basics.ui.fragment.ManageAccountFragment
 import com.example.basics.ui.fragment.OrderFragment
 import com.example.basics.ui.fragment.ProfileFragment
 import com.example.basics.ui.fragment.TagFragment
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -55,7 +57,8 @@ class ProfileActivity : AppCompatActivity() {
                         when (f) {
                             is ProfileFragment -> "Profile"
                             is OrderFragment -> "My Orders"
-                            is ItemHistoryFragment->"Order Details"
+                            is ItemHistoryFragment -> "Order Details"
+                            is ManageAccountFragment -> "Manage Your Account"
                             else -> "Profile"
                         }
                 }
