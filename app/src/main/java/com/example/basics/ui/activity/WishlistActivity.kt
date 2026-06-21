@@ -78,6 +78,7 @@ class WishlistActivity : AppCompatActivity() {
 
         binding.addToBagImg.setOnClickListener {
             val intent= Intent(this, CartActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
             startActivity(intent)
         }
 
@@ -125,6 +126,7 @@ class WishlistActivity : AppCompatActivity() {
             dialog.dismiss()
         }
     }
+
 
 
 }

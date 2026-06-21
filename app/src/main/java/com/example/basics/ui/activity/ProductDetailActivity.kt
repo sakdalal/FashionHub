@@ -2,6 +2,7 @@ package com.example.basics.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +14,9 @@ import com.example.basics.databinding.CustomToastBinding
 import com.example.basics.db.CartEntity
 import com.example.basics.db.WishlistEntity
 import com.example.basics.model.FeatureBrand
+import com.example.basics.model.User
+import com.example.basics.viewmodel.AddressViewModel
+import com.example.basics.viewmodel.AddressViewModelFactory
 import com.example.basics.viewmodel.CartViewModel
 import com.example.basics.viewmodel.CartViewModelFactory
 import com.example.basics.viewmodel.OrderViewModel
@@ -20,6 +24,8 @@ import com.example.basics.viewmodel.OrderViewModelFactory
 import com.example.basics.viewmodel.WishlistViewModel
 import com.example.basics.viewmodel.WishlistViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -27,24 +33,28 @@ class ProductDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductDetailBinding
     private lateinit var cartViewModel: CartViewModel
 
+    private lateinit var addressViewModel: AddressViewModel
+
     private var isInCart = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, true)
 
-        binding =
-            ActivityProductDetailBinding.inflate(
-                layoutInflater
-            )
+        binding = ActivityProductDetailBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
         @Suppress("DEPRECATION")
-        val product =
-            intent.getSerializableExtra(
-                "PRODUCT"
-            ) as FeatureBrand
+        val product = intent.getSerializableExtra("PRODUCT") as FeatureBrand
+
+        val addressRepository =
+            (application as MyApplication).addressRepository
+
+        addressViewModel = ViewModelProvider(
+            this,
+            AddressViewModelFactory(addressRepository)
+        )[AddressViewModel::class.java]
 
         binding.brandName.text = product.brand
         binding.brandTitle.text = product.title
@@ -59,6 +69,37 @@ class ProductDetailActivity : AppCompatActivity() {
         Glide.with(this)
             .load(product.thumbnail)
             .into(binding.productImage)
+
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
+        FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(uid)
+            .get()
+            .addOnSuccessListener {
+                val user = it.toObject(User::class.java)
+                Log.d("PROFILE", "User Name: ${user?.name}")
+                binding.profileName.text = user?.name
+            }
+            .addOnFailureListener {
+                Log.e("PROFILE", "Error", it)
+            }
+        val userId =
+            FirebaseAuth.getInstance().currentUser?.uid ?: return
+        lifecycleScope.launch {
+            val defaultAddress =
+                addressViewModel.getDefaultAddress(userId)
+
+            defaultAddress?.let {
+                binding.profileAddress.text =
+                    "${it.house}, ${it.address}"
+
+            } ?: run {
+                binding.profileAddress.text =
+                    "No default address selected"
+
+            }
+        }
+
 
         val orderRepository =
             (application as MyApplication).orderRepository
@@ -85,9 +126,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             wishlistViewModel.wishlistItems.collect { items ->
-
                 val exists = items.any { it.id == product.id }
-
                 binding.wishlistText.text =
                     if (exists) {
                         "Wishlisted"
@@ -114,7 +153,9 @@ class ProductDetailActivity : AppCompatActivity() {
 
         binding.addToBag.setOnClickListener {
             if (isInCart) {
-                startActivity(Intent(this, CartActivity::class.java))
+                val intent=Intent(this, CartActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                startActivity(intent)
             } else {
                 val cartItem = CartEntity(
                     id = product.id,
@@ -197,6 +238,11 @@ class ProductDetailActivity : AppCompatActivity() {
 
         binding.productTopBar.accountIcon.setOnClickListener {
             val intent = Intent(this, CartActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.change.setOnClickListener {
+            val intent= Intent(this,AddressActivity::class.java)
             startActivity(intent)
         }
 

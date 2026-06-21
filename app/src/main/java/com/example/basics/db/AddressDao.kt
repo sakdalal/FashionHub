@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AddressDao {
@@ -26,7 +27,7 @@ interface AddressDao {
     suspend fun getAllAddresses(): List<AddressEntity>
 
     @Query("SELECT * FROM address WHERE userId = :userId")
-    suspend fun getAddressesByUserId(userId: String): List<AddressEntity>
+    fun getAddressesByUserId(userId: String): Flow<List<AddressEntity>>
 
     @Query("SELECT * FROM address WHERE id = :id")
     suspend fun getAddressById(id: Int): AddressEntity?

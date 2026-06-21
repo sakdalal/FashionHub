@@ -24,7 +24,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="@id/bannerImage" />
 
     <TextView
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="@id/bannerImage"
         app:layout_constraintStart_toStartOf="@id/bannerImage"
         android:layout_marginBottom="10dp"

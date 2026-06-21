@@ -34,18 +34,31 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
-        binding.topBar.wishlistIcon.setOnClickListener {
-            val intent = Intent(this, WishlistActivity::class.java)
-            startActivity(intent)
-        }
+
+        binding.footer.bottomNav.selectedItemId = R.id.home
 
         binding.footer.bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.cart -> {
-                    val intent = Intent(this, CartActivity::class.java)
+                R.id.home -> true
+                R.id.wishlist -> {
+                    val intent = Intent(this, WishlistActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
                     startActivity(intent)
                     true
                 }
+                R.id.bag -> {
+                    val intent = Intent(this, CartActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                    startActivity(intent)
+                    true
+                }
+                R.id.profile -> {
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                    startActivity(intent)
+                    true
+                }
+
 
                 else -> {
                     false
@@ -53,9 +66,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.topBar.accountIcon.setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
-        }
 
         binding.topBar.cameraIcon.setOnClickListener {
             if (
@@ -160,17 +170,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(
                 RecognizerIntent.ACTION_RECOGNIZE_SPEECH
             )
-
             intent.putExtra(
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
-
             intent.putExtra(
                 RecognizerIntent.EXTRA_PROMPT,
                 "Speak now..."
             )
-
             voiceRecognitionLauncher.launch(intent)
 
         }catch (e: Exception){
@@ -189,17 +196,12 @@ class MainActivity : AppCompatActivity() {
         ) { result ->
 
             if (result.resultCode == RESULT_OK && result.data != null) {
-
                 val matches = result.data?.getStringArrayListExtra(
                     RecognizerIntent.EXTRA_RESULTS
                 )
-
                 if (!matches.isNullOrEmpty()) {
-
                     val spokenText = matches[0]
-
                     binding.topBar.searchArea.setText(spokenText)
-
                     Toast.makeText(
                         this,
                         "You said: $spokenText",
@@ -208,5 +210,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+    override fun onResume() {
+        super.onResume()
+        binding.footer.bottomNav.selectedItemId = R.id.home
+    }
 
 }

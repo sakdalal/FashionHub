@@ -19,35 +19,36 @@
         android:id="@+id/nameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:hint="Name"
         app:boxBackgroundMode="none"
-        android:layout_marginTop="40dp"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
         app:hintTextColor="@color/text_input_stroke"
         app:layout_constraintTop_toBottomOf="@id/divOne">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/nameText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:background="@null"
-        android:backgroundTint="@android:color/transparent"
-        app:layout_constraintBottom_toTopOf="@id/nameLayout"
-        app:layout_constraintTop_toBottomOf="@id/divOne" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:backgroundTint="@android:color/transparent"
+            android:inputType="textPersonName"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/nameLayout"
+            app:layout_constraintTop_toBottomOf="@id/divOne" />
+
         <View
             android:id="@+id/nameDivider"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="#C4C4C4"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            app:layout_constraintTop_toBottomOf="@id/nameText"
+            android:background="#C4C4C4"
+            app:layout_constraintEnd_toEndOf="@id/nameText"
             app:layout_constraintStart_toStartOf="@id/nameText"
-            app:layout_constraintEnd_toEndOf="@id/nameText"/>
+            app:layout_constraintTop_toBottomOf="@id/nameText" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,11 +57,11 @@
         android:id="@+id/mobileLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:hint="Mobile"
         app:boxBackgroundMode="none"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
-        android:layout_marginTop="20dp"
         app:hintTextColor="@color/text_input_stroke"
         app:layout_constraintTop_toBottomOf="@id/nameLayout">
 
@@ -68,34 +69,34 @@
             android:id="@+id/mobileText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:backgroundTint="@android:color/transparent"
             android:inputType="textPersonName"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:background="@null"
-            android:backgroundTint="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@id/mobileLayout"
             app:layout_constraintTop_toBottomOf="@id/nameLayout" />
+
         <View
             android:id="@+id/mobileDivider"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="#C4C4C4"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            app:layout_constraintTop_toBottomOf="@id/mobileText"
+            android:background="#C4C4C4"
+            app:layout_constraintEnd_toEndOf="@id/mobileText"
             app:layout_constraintStart_toStartOf="@id/mobileText"
-            app:layout_constraintEnd_toEndOf="@id/mobileText"/>
+            app:layout_constraintTop_toBottomOf="@id/mobileText" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
 
     <View
         android:id="@+id/divTwo"
         android:layout_width="wrap_content"
         android:layout_height="10dp"
-        android:background="#DBDBDB"
         android:layout_marginTop="40dp"
+        android:background="#DBDBDB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mobileLayout" />
@@ -104,37 +105,38 @@
         android:id="@+id/pincodeLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:hint="Pincode"
         app:boxBackgroundMode="none"
-        android:layout_marginTop="40dp"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
         app:hintTextColor="@color/text_input_stroke"
-        app:layout_constraintTop_toBottomOf="@id/divTwo"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divTwo"
         app:layout_constraintWidth_percent="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/pincodeText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:backgroundTint="@android:color/transparent"
             android:inputType="textPersonName"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:background="@null"
-            android:backgroundTint="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@id/pincodeLayout"
             app:layout_constraintTop_toBottomOf="@id/divTwo" />
+
         <View
             android:id="@+id/pincodeDivider"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="#C4C4C4"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            app:layout_constraintTop_toBottomOf="@id/pincodeText"
+            android:background="#C4C4C4"
+            app:layout_constraintEnd_toEndOf="@id/pincodeText"
             app:layout_constraintStart_toStartOf="@id/pincodeText"
-            app:layout_constraintEnd_toEndOf="@id/pincodeText"/>
+            app:layout_constraintTop_toBottomOf="@id/pincodeText" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -143,37 +145,38 @@
         android:id="@+id/stateLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:hint="State"
         app:boxBackgroundMode="none"
-        android:layout_marginTop="40dp"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
         app:hintTextColor="@color/text_input_stroke"
-        app:layout_constraintTop_toBottomOf="@id/divTwo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divTwo"
         app:layout_constraintWidth_percent="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/stateText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:backgroundTint="@android:color/transparent"
             android:inputType="textPersonName"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:background="@null"
-            android:backgroundTint="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@id/stateLayout"
             app:layout_constraintTop_toBottomOf="@id/divTwo" />
+
         <View
             android:id="@+id/stateDivider"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="#C4C4C4"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            app:layout_constraintTop_toBottomOf="@id/stateText"
+            android:background="#C4C4C4"
+            app:layout_constraintEnd_toEndOf="@id/stateText"
             app:layout_constraintStart_toStartOf="@id/stateText"
-            app:layout_constraintEnd_toEndOf="@id/stateText"/>
+            app:layout_constraintTop_toBottomOf="@id/stateText" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -182,11 +185,11 @@
         android:id="@+id/houseLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:hint="House Number/Tower/Black"
         app:boxBackgroundMode="none"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
-        android:layout_marginTop="20dp"
         app:hintTextColor="@color/text_input_stroke"
         app:layout_constraintTop_toBottomOf="@id/pincodeLayout">
 
@@ -194,23 +197,24 @@
             android:id="@+id/houseText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:backgroundTint="@android:color/transparent"
             android:inputType="textPersonName"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:background="@null"
-            android:backgroundTint="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@id/houseLayout"
             app:layout_constraintTop_toBottomOf="@id/houseLayout" />
+
         <View
             android:id="@+id/houseDivider"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="#C4C4C4"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            app:layout_constraintTop_toBottomOf="@id/houseText"
+            android:background="#C4C4C4"
+            app:layout_constraintEnd_toEndOf="@id/houseText"
             app:layout_constraintStart_toStartOf="@id/houseText"
-            app:layout_constraintEnd_toEndOf="@id/houseText"/>
+            app:layout_constraintTop_toBottomOf="@id/houseText" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -219,11 +223,11 @@
         android:id="@+id/addressLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:hint="Address (Building, Street, Area)"
         app:boxBackgroundMode="none"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
-        android:layout_marginTop="20dp"
         app:hintTextColor="@color/text_input_stroke"
         app:layout_constraintTop_toBottomOf="@id/houseLayout">
 
@@ -231,23 +235,24 @@
             android:id="@+id/addressText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:backgroundTint="@android:color/transparent"
             android:inputType="textPersonName"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:background="@null"
-            android:backgroundTint="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@id/stateLayout"
             app:layout_constraintTop_toBottomOf="@id/stateLayout" />
+
         <View
             android:id="@+id/addressDivider"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="#C4C4C4"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            app:layout_constraintTop_toBottomOf="@id/stateText"
+            android:background="#C4C4C4"
+            app:layout_constraintEnd_toEndOf="@id/stateText"
             app:layout_constraintStart_toStartOf="@id/stateText"
-            app:layout_constraintEnd_toEndOf="@id/stateText"/>
+            app:layout_constraintTop_toBottomOf="@id/stateText" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -255,11 +260,11 @@
         android:id="@+id/cityLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:hint="City/District"
         app:boxBackgroundMode="none"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
-        android:layout_marginTop="20dp"
         app:hintTextColor="@color/text_input_stroke"
         app:layout_constraintTop_toBottomOf="@id/addressLayout">
 
@@ -267,23 +272,24 @@
             android:id="@+id/cityText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:backgroundTint="@android:color/transparent"
             android:inputType="textPersonName"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:background="@null"
-            android:backgroundTint="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@id/addressLayout"
             app:layout_constraintTop_toBottomOf="@id/addressLayout" />
+
         <View
             android:id="@+id/cityDivider"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="#C4C4C4"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            app:layout_constraintTop_toBottomOf="@id/cityText"
+            android:background="#C4C4C4"
+            app:layout_constraintEnd_toEndOf="@id/cityText"
             app:layout_constraintStart_toStartOf="@id/cityText"
-            app:layout_constraintEnd_toEndOf="@id/cityText"/>
+            app:layout_constraintTop_toBottomOf="@id/cityText" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -292,8 +298,8 @@
         android:id="@+id/divThree"
         android:layout_width="wrap_content"
         android:layout_height="10dp"
-        android:background="#DBDBDB"
         android:layout_marginTop="40dp"
+        android:background="#DBDBDB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cityLayout" />
@@ -302,46 +308,46 @@
         android:id="@+id/addressType"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Type of Address"
-        android:textSize="15sp"
-        android:textColor="#808080"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintWidth_percent="0.6"
+        android:text="Type of Address"
+        android:textColor="#808080"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divThree"/>
+        app:layout_constraintTop_toBottomOf="@id/divThree"
+        app:layout_constraintWidth_percent="0.6" />
 
     <RadioGroup
         android:id="@+id/addressGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/addressType"
+        app:layout_constraintEnd_toEndOf="@id/addressType"
         app:layout_constraintStart_toStartOf="@id/addressType"
-        app:layout_constraintEnd_toEndOf="@id/addressType">
+        app:layout_constraintTop_toBottomOf="@id/addressType">
 
         <RadioButton
             android:id="@+id/homeRadioBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:gravity="center"
-            android:textColor="#969696"
             android:buttonTint="@color/radio_button_color"
-            android:text="Home"/>
+            android:gravity="center"
+            android:text="Home"
+            android:textColor="#969696" />
 
         <RadioButton
             android:id="@+id/officeRadioBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:gravity="center"
-            android:textColor="#969696"
-            android:buttonTint="@color/radio_button_color"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="50dp"
-            android:text="Office"/>
+            android:layout_weight="0.2"
+            android:buttonTint="@color/radio_button_color"
+            android:gravity="center"
+            android:text="Office"
+            android:textColor="#969696" />
 
     </RadioGroup>
 
@@ -350,23 +356,22 @@
         android:id="@+id/addressTypeDivider"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="#C4C4C4"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintTop_toBottomOf="@id/addressGroup"
+        android:background="#C4C4C4"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/addressGroup" />
 
     <CheckBox
         android:id="@+id/defaultAddressCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#969696"
         android:buttonTint="@color/radio_button_color"
-        app:layout_constraintTop_toBottomOf="@id/addressTypeDivider"
+        android:text="Make this as my default address"
+        android:textColor="#969696"
         app:layout_constraintStart_toStartOf="@id/addressTypeDivider"
-        android:text="Make this as my default address"/>
-
+        app:layout_constraintTop_toBottomOf="@id/addressTypeDivider" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -71,12 +71,6 @@ class CartActivity : AppCompatActivity() {
             AddressViewModelFactory(addressRepository)
         )[AddressViewModel::class.java]
 
-
-
-
-
-
-
         adapter = CartAdapter { item ->
             showBottomSheet(item)
         }
@@ -119,6 +113,7 @@ class CartActivity : AppCompatActivity() {
 
         binding.wishlistIcon.setOnClickListener {
             val intent = Intent(this, WishlistActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
             startActivity(intent)
         }
 
@@ -133,12 +128,12 @@ class CartActivity : AppCompatActivity() {
 
                 if (defaultAddress == null) {
 
-                    startActivity(
-                        Intent(
-                            this@CartActivity,
-                            AddressActivity::class.java
-                        )
+                    val intent=Intent(
+                        this@CartActivity,
+                        AddressActivity::class.java
                     )
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                    startActivity(intent)
 
                     return@launch
                 }

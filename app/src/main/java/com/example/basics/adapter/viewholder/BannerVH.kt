@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.basics.adapter.BannerAdapter
 import com.example.basics.databinding.ItemBannerBinding
+import com.example.basics.listener.OnProductClickListener
 import com.example.basics.model.Banner
+import com.example.basics.model.FeatureBrand
 
-class BannerVH(private val binding: ItemBannerBinding) :
+class BannerVH(private val binding: ItemBannerBinding,listener: OnProductClickListener) :
     RecyclerView.ViewHolder(binding.root) {
-        private val bannerAdapter= BannerAdapter()
+        private val bannerAdapter= BannerAdapter(listener)
 
         private val handler= Handler(Looper.getMainLooper())
 
@@ -35,7 +37,7 @@ class BannerVH(private val binding: ItemBannerBinding) :
             binding.dotsIndicator.attachTo(binding.bannerViewPager)
         }
 
-    fun bind(banners: List<Banner>) {
+    fun bind(banners: List<FeatureBrand>) {
         bannerAdapter.submitList(banners)
         handler.removeCallbacks(autoScrollRunnable)
 

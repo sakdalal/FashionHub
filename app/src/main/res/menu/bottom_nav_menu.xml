@@ -6,22 +6,17 @@
         android:title="Home" />
 
     <item
-        android:id="@+id/tag"
-        android:icon="@drawable/tag"
-        android:title="Under ₹999" />
+        android:id="@+id/wishlist"
+        android:icon="@drawable/heart"
+        android:title="Wishlist" />
 
     <item
-        android:id="@+id/fastshop"
-        android:icon="@drawable/stopwatch"
-        android:title="From 30 min" />
-
-    <item
-        android:id="@+id/luxe"
-        android:icon="@drawable/sparkle"
-        android:title="Luxury" />
-    <item
-        android:id="@+id/cart"
+        android:id="@+id/bag"
         android:icon="@drawable/bag"
         android:title="Bag" />
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/account"
+        android:title="Profile" />
 
 </menu>

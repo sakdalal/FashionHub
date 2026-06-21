@@ -40,12 +40,6 @@ class HomeAdapter(private var list: List<HomeItem>, private val listener: OnProd
             is HomeItem.SellerSection -> 4
             is HomeItem.ProductSection -> 5
 
-//            is HomeItem.BannerLoading -> 100
-//            is HomeItem.CardLoading -> 101
-//            is HomeItem.FeatureBrandLoading -> 102
-//            is HomeItem.OfferLoading -> 103
-//            is HomeItem.SellerLoading -> 104
-//            is HomeItem.ProductLoading -> 105
         }
     }
 
@@ -56,15 +50,11 @@ class HomeAdapter(private var list: List<HomeItem>, private val listener: OnProd
         Log.d("HOME_ADAPTER", "create holder type=$viewType")
         return when (viewType) {
 
-//            100-> LoadingVH(inflater.inflate(R.layout.loading_banner,parent,false))
-//            101-> LoadingVH(inflater.inflate(R.layout.loading_card,parent,false))
-//            102-> LoadingVH(inflater.inflate(R.layout.loading_feature_brand,parent,false))
-//            103-> LoadingVH(inflater.inflate(R.layout.loading_offer,parent,false))
-//            104-> LoadingVH(inflater.inflate(R.layout.loading_seller,parent,false))
-//            105-> LoadingVH(inflater.inflate(R.layout.loading_product,parent,false))
 
-            0 -> BannerVH(ItemBannerBinding.inflate(inflater, parent, false))
-            1 -> CardSectionVH(ItemSectionBinding.inflate(inflater, parent, false))
+            0 -> BannerVH(ItemBannerBinding.inflate(inflater, parent, false),listener)
+            1 -> CardSectionVH(
+                ItemSectionBinding.inflate(inflater, parent, false),
+                listener)
             2 -> FeatureBrandSectionVH(
                 ItemSectionBinding.inflate(inflater, parent, false),
                 listener
@@ -84,8 +74,6 @@ class HomeAdapter(private var list: List<HomeItem>, private val listener: OnProd
             "bind position=$position holder=${holder::class.java.simpleName}"
         )
         when (holder) {
-
-//            is LoadingVH ->{ }
 
             is BannerVH -> holder.bind((item as HomeItem.BannerSection).banners)
 

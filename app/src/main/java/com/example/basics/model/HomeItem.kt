@@ -3,9 +3,9 @@ package com.example.basics.model
 sealed class HomeItem {
 
 
-    data class BannerSection(val banners: List<Banner>) : HomeItem()
+    data class BannerSection(val banners: List<FeatureBrand>) : HomeItem()
 
-    data class CardSection(val cards: List<Card>) : HomeItem()
+    data class CardSection(val cards: List<FeatureBrand>) : HomeItem()
 
     data class FeatureBrandSection(val featureBrands: List<FeatureBrand>) : HomeItem()
 

@@ -93,7 +93,9 @@ class ProfileFragment : Fragment() {
         }
 
         binding.manageExtra.addressBox.setOnClickListener {
-            startActivity(Intent(requireContext(), AddressActivity::class.java))
+            val intent=Intent(requireContext(), AddressActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            startActivity(intent)
         }
 
 

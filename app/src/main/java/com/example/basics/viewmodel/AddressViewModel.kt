@@ -1,9 +1,11 @@
 package com.example.basics.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.basics.db.AddressEntity
 import com.example.basics.repository.AddressRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class AddressViewModel(
@@ -12,7 +14,12 @@ class AddressViewModel(
 
     fun insertAddress(address: AddressEntity) {
         viewModelScope.launch {
-            repository.insertAddress(address)
+            try {
+                repository.insertAddress(address)
+                Log.d("ADDRESS_DEBUG", "Insert successful")
+            }catch (e: Exception){
+                Log.d("ADDRESS_DEBUG", "Insert failed", e)
+            }
         }
     }
 
@@ -50,7 +57,7 @@ class AddressViewModel(
         return repository.getAllAddresses()
     }
 
-    suspend fun getAddressesByUserId(userId: String): List<AddressEntity> {
+     fun getAddressesByUserId(userId: String): Flow<List<AddressEntity>> {
         return repository.getAddressesByUserId(userId)
     }
 
@@ -68,7 +75,7 @@ class AddressViewModel(
         }
     }
 
-    suspend fun hasAddress(userId: String): Boolean {
-        return repository.getAddressesByUserId(userId).isNotEmpty()
-    }
+//    suspend fun hasAddress(userId: String): Boolean {
+//        return repository.getAddressesByUserId(userId).isNotEmpty()
+//    }
 }

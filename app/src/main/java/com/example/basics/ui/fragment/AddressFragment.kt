@@ -9,6 +9,7 @@ import com.example.basics.R
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.basics.MyApplication
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -20,16 +21,21 @@ import com.example.basics.viewmodel.OrderViewModel
 import com.example.basics.viewmodel.OrderViewModelFactory
 import com.example.basics.viewmodel.SharedAddressViewModel
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
 
 
 class AddressFragment : Fragment() {
 
 
+    private var addressId: Int = -1
     private lateinit var binding: FragmentAddressBinding
     private val sharedViewModel: SharedAddressViewModel by activityViewModels()
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        addressId = arguments?.getInt("address_id", -1) ?: -1
 
     }
 
@@ -51,34 +57,13 @@ class AddressFragment : Fragment() {
             AddressViewModelFactory(addressRepository)
         )[AddressViewModel::class.java]
 
-
         setupValidation(binding.nameText, binding.nameLayout, binding.nameDivider, "Name")
         setupValidation(binding.mobileText, binding.mobileLayout, binding.mobileDivider, "Mobile")
-        setupValidation(
-            binding.pincodeText,
-            binding.pincodeLayout,
-            binding.pincodeDivider,
-            "Pincode"
-        )
+        setupValidation(binding.pincodeText, binding.pincodeLayout, binding.pincodeDivider, "Pincode")
         setupValidation(binding.stateText, binding.stateLayout, binding.stateDivider, "State")
-        setupValidation(
-            binding.addressText,
-            binding.addressLayout,
-            binding.addressDivider,
-            "Address (Building, Street, Area)"
-        )
-        setupValidation(
-            binding.cityText,
-            binding.cityLayout,
-            binding.cityDivider,
-            "House Number/Tower/Block"
-        )
-        setupValidation(
-            binding.houseText,
-            binding.houseLayout,
-            binding.houseDivider,
-            "City/District"
-        )
+        setupValidation(binding.addressText, binding.addressLayout, binding.addressDivider, "Address (Building, Street, Area)")
+        setupValidation(binding.cityText, binding.cityLayout, binding.cityDivider, "House Number/Tower/Block")
+        setupValidation(binding.houseText, binding.houseLayout, binding.houseDivider, "City/District")
 
 
         val colorStateList =
@@ -96,7 +81,7 @@ class AddressFragment : Fragment() {
             }
 
             val address = AddressEntity(
-                id = 0,
+                id =if (addressId == -1) 0 else addressId,
                 userId = FirebaseAuth.getInstance().currentUser?.uid ?: "",
                 name = binding.nameText.text.toString(),
                 mobile = binding.mobileText.text.toString(),
@@ -112,11 +97,39 @@ class AddressFragment : Fragment() {
                 defaultAddress = binding.defaultAddressCheckBox.isChecked
             )
 
-            addressViewModel.insertAddress(address)
-
+            if(addressId==-1) {
+                addressViewModel.insertAddress(address)
+            } else{
+                addressViewModel.updateAddress(address)
+            }
             sharedViewModel.onAddressSaved()
+            parentFragmentManager.popBackStack()
+
+        }
 
 
+        viewLifecycleOwner.lifecycleScope.launch {
+
+            if (addressId != -1) {
+
+                val address = addressViewModel.getAddressById(addressId)
+
+                address?.let {
+
+                    binding.nameText.setText(it.name)
+                    binding.houseText.setText(it.house)
+                    binding.addressText.setText(it.address)
+                    binding.cityText.setText(it.city)
+                    binding.stateText.setText(it.state)
+                    binding.pincodeText.setText(it.pincode)
+                    binding.mobileText.setText(it.mobile)
+
+                    if (it.addressType == "Home")
+                        binding.homeRadioBtn.isChecked = true
+                    else
+                        binding.officeRadioBtn.isChecked = true
+                }
+            }
         }
 
     }

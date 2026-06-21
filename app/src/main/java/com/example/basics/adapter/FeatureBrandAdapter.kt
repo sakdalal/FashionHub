@@ -14,12 +14,6 @@ class FeatureBrandAdapter(private val listener: OnProductClickListener): ListAda
 
     private val wishlistedIds = mutableSetOf<Int>()
 
-    fun updateWishlist(ids: Set<Int>) {
-        wishlistedIds.clear()
-        wishlistedIds.addAll(ids)
-        notifyDataSetChanged()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = FeatureBrandBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return MyViewHolder(binding)
@@ -60,6 +54,11 @@ class FeatureBrandAdapter(private val listener: OnProductClickListener): ListAda
 
     }
 
+    fun updateWishlist(ids: Set<Int>) {
+        wishlistedIds.clear()
+        wishlistedIds.addAll(ids)
+        notifyDataSetChanged()
+    }
 
 
 }

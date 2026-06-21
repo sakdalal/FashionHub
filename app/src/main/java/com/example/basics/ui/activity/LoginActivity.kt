@@ -31,7 +31,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.signupClick.setOnClickListener {
-            startActivity(Intent(this, SignupActivity::class.java))
+            val intent=Intent(this, SignupActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            startActivity(intent)
         }
 
     }

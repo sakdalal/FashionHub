@@ -1,14 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DBDBDB"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.NewAddressFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <View
+        android:id="@+id/divOne"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="4dp"
+        android:background="#ADADAD"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/addOption"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="+ ADD NEW ADDRESS"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textColor="#2C5EAD"
+        android:background="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divOne"
+        app:layout_constraintBottom_toTopOf="@id/divTwo"/>
+
+
+    <View
+        android:id="@+id/divTwo"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="#ADADAD"
+        app:layout_constraintTop_toBottomOf="@id/addOption"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/addressType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DEFAULT ADDRESS"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:background="#DBDBDB"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@id/divTwo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <include
+        android:id="@+id/defaultAddress"
+        layout="@layout/add_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/addressType"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/addressTypeTwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OTHER ADDRESSES"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:background="#DBDBDB"
+        android:paddingStart="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/defaultAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/addressTypeTwo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

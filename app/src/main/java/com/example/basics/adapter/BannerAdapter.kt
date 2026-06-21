@@ -11,25 +11,32 @@ import com.example.basics.databinding.ItemBannerBinding
 import com.example.basics.databinding.ItemBannerPageBinding
 import com.example.basics.model.Banner
 import com.example.basics.databinding.TopBannerBinding
+import com.example.basics.listener.OnProductClickListener
+import com.example.basics.model.FeatureBrand
 
-class BannerAdapter: ListAdapter<Banner, BannerAdapter.BannerPageVH>(BannerDiffCallBack()) {
+class BannerAdapter(private val listener: OnProductClickListener): ListAdapter<FeatureBrand, BannerAdapter.BannerPageVH>(FeatureDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BannerPageVH {
         val binding = ItemBannerPageBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return BannerPageVH(binding)
+        return BannerPageVH(binding,listener)
     }
 
     override fun onBindViewHolder(holder: BannerPageVH, position: Int) {
          holder.bind(getItem(position))
     }
-    class BannerPageVH(val binding: ItemBannerPageBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(banner: Banner){
+    class BannerPageVH(val binding: ItemBannerPageBinding,private val listener: OnProductClickListener): RecyclerView.ViewHolder(binding.root){
+        fun bind(banner: FeatureBrand){
             binding.bigText.text=banner.title
             binding.smallText.text=banner.discountPercentage
             Glide.with(binding.root.context)
                 .load(banner.thumbnail)
                 .placeholder(R.color.holo_blue_light)
                 .into(binding.bannerImage)
+
+            binding.root.setOnClickListener {
+                listener.onProductClick(banner)
+            }
+
         }
     }
 }

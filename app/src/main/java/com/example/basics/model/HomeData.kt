@@ -1,9 +1,9 @@
 package com.example.basics.model
 
 data class HomeData (
-    val banners: List<Banner>,
+    val banners: List<FeatureBrand>,
 
-    val cards: List<Card>,
+    val cards: List<FeatureBrand>,
 
     val offers: List<OfferSmall>,
 

@@ -2,6 +2,7 @@ package com.example.basics.repository
 
 import com.example.basics.db.AddressDao
 import com.example.basics.db.AddressEntity
+import kotlinx.coroutines.flow.Flow
 
 class AddressRepository(
     private val addressDao: AddressDao
@@ -19,6 +20,10 @@ class AddressRepository(
     }
 
     suspend fun updateAddress(address: AddressEntity) {
+        if(address.defaultAddress) {
+            addressDao.clearDefaultAddress(address.userId)
+        }
+
         addressDao.updateAddress(address)
     }
 
@@ -30,7 +35,7 @@ class AddressRepository(
         return addressDao.getAllAddresses()
     }
 
-    suspend fun getAddressesByUserId(userId: String): List<AddressEntity> {
+    fun getAddressesByUserId(userId: String): Flow<List<AddressEntity>> {
         return addressDao.getAddressesByUserId(userId)
     }
 

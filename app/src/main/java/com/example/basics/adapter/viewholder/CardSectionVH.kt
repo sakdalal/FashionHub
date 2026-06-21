@@ -5,12 +5,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basics.adapter.CardAdapter
 import com.example.basics.databinding.ItemSectionBinding
+import com.example.basics.listener.OnProductClickListener
 import com.example.basics.model.Card
+import com.example.basics.model.FeatureBrand
 
-class CardSectionVH(private val binding: ItemSectionBinding) :
+class CardSectionVH(private val binding: ItemSectionBinding,listener: OnProductClickListener) :
     RecyclerView.ViewHolder(binding.root) {
 
-       private val cardAdapter=CardAdapter()
+       private val cardAdapter=CardAdapter(listener)
 
         init {
             binding.recyclerView.layoutManager =
@@ -18,7 +20,7 @@ class CardSectionVH(private val binding: ItemSectionBinding) :
             binding.recyclerView.adapter=cardAdapter
         }
 
-    fun bind(cards: List<Card>) {
+    fun bind(cards: List<FeatureBrand>) {
         cardAdapter.submitList(cards)
     }
 }
