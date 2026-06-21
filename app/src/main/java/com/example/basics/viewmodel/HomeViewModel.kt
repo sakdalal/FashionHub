@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.basics.R
 import com.example.basics.db.WishlistEntity
+import com.example.basics.model.FeatureBrand
 import com.example.basics.model.HomeItem
 import com.example.basics.repository.HomeRepository
 import com.example.basics.repository.WishlistRepository
@@ -20,6 +21,18 @@ class HomeViewModel : ViewModel() {
     private val repository = HomeRepository()
     private val _feed = MutableLiveData<List<HomeItem>>()
     val feed: LiveData<List<HomeItem>> = _feed
+
+    private var originalFeed = emptyList<HomeItem>()
+
+    private var allProducts = emptyList<FeatureBrand>()
+
+    private val _searchResults =
+        MutableLiveData<List<FeatureBrand>>()
+
+    val searchResults: LiveData<List<FeatureBrand>>
+        get() = _searchResults
+
+
     init {
         loadFeed()
     }
@@ -38,6 +51,7 @@ class HomeViewModel : ViewModel() {
 
             try {
                 val data = repository.getHomeData()
+                allProducts = repository.getSearchProducts()
 
                 Log.d("HOME_VM", "banners ${data.banners.size}")
                 Log.d("HOME_VM", "cards ${data.cards.size}")
@@ -84,6 +98,8 @@ class HomeViewModel : ViewModel() {
                     "homeFeed size ${homeFeed.size}"
                 )
 
+
+                originalFeed = homeFeed
                 _feed.postValue(homeFeed)
 
                 Log.d("HOME_VM", "feed assigned")
@@ -97,47 +113,23 @@ class HomeViewModel : ViewModel() {
                 e.printStackTrace()
             }
         }
+
     }
 
-//    private fun loadFeed(){
-//        Log.d("HOME_VM", "loadFeed called")
-//        viewModelScope.launch (Dispatchers.IO){
-//            try {
-//                Log.d("HOME_VM", "before banner")
-//                val banners = repository.getBannerData()
-//                Log.d("HOME_VM", "banner success ${banners.size}")
-//                val cards = repository.getCardData()
-//                Log.d("HOME_VM", "cards success ${cards.size}")
-//                val offers = repository.getOfferData()
-//                Log.d("HOME_VM", "offers success ${offers.size}")
-//                val featureBrands= repository.getFeatureData()
-//                Log.d("HOME_VM", "feature success ${featureBrands.size}")
-//                val bestSellers= repository.getSellerData()
-//                val products= repository.getProductData()
-//                val mappedData=mapOf(
-//                    0 to products.take(6),
-//                    1 to products.drop(6).take(6),
-//                    2 to products.drop(12).take(6)
-//                )
-//                val homeFeed = listOf(
-//                    HomeItem.BannerSection(banners = banners),
-//                    HomeItem.CardSection(cards= cards),
-//                    HomeItem.OfferSection(offers = offers),
-//                    HomeItem.FeatureBrandSection(featureBrands=featureBrands),
-//                    HomeItem.SellerSection(bestSellers=bestSellers),
-//                    HomeItem.ProductSection(tabs=tabs,data = mappedData)
-//                )
-//                Log.d("HOME_VM", "homeFeed size ${homeFeed.size}")
-////                _feed.value=homeFeed
-//                _feed.postValue(homeFeed)
-//                Log.d("HOME_VM", "feed assigned")
-//            }catch (e: Exception){
-//
-//                Log.d("HOME_VM_ERROR", e.toString())
-//                e.printStackTrace()
-//            }
-//        }
-//    }
+    fun search(query: String): List<FeatureBrand> {
+
+        val filtered =
+            allProducts.filter {
+
+                it.title.contains(query, true) ||
+                        (it.brand?.contains(query, true) == true) ||
+                        it.category.contains(query, true)
+            }
+
+        _searchResults.value = filtered
+
+        return filtered
+    }
 
 
 }

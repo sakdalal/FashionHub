@@ -128,6 +128,7 @@ class AddressFragment : Fragment() {
                         binding.homeRadioBtn.isChecked = true
                     else
                         binding.officeRadioBtn.isChecked = true
+                    binding.defaultAddressCheckBox.isChecked = it.defaultAddress
                 }
             }
         }

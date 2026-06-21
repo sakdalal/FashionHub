@@ -1,5 +1,7 @@
 package com.example.basics.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.basics.model.Banner
 import com.example.basics.model.Card
 import com.example.basics.model.FeatureBrand
@@ -99,6 +101,35 @@ class HomeRepository {
             }
         )
     }
+
+
+    suspend fun getSearchProducts(): List<FeatureBrand> {
+
+        val dummyResponse =
+            RetrofitInstance.dummyApi.getDummyProducts()
+
+        return dummyResponse.products.map {
+
+            FeatureBrand(
+                id = it.id,
+                title = it.title,
+                discountPercentage = it.discountPercentage,
+                thumbnail = it.thumbnail,
+                image = it.image,
+                category = it.category,
+                price = it.price,
+                availabilityStatus = it.availabilityStatus,
+                brand = it.brand,
+                shippingInformation = it.shippingInformation,
+                description = it.description,
+                stock = it.stock,
+                warrantyInformation = it.warrantyInformation,
+                returnPolicy = it.returnPolicy,
+                rating = it.rating
+            )
+        }
+    }
+
 
 
 

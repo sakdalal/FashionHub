@@ -11,5 +11,7 @@ data class HomeData (
 
     val bestSellers: List<Seller>,
 
-    val products: List<Product>
+    val products: List<Product>,
+
+//    val searchProducts: List<Product>
 )

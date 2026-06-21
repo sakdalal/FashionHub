@@ -1,6 +1,6 @@
 package com.example.basics.adapter
 
-import android.R
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -37,9 +37,4 @@ class ProductAdapter: ListAdapter<Product, ProductAdapter.ViewHolder>(ProductDif
 
     }
 
-//    fun updateData(newList: List<Product>) {
-//        productList.clear()
-//        productList.addAll(newList)
-//        notifyDataSetChanged()
-//    }
 }

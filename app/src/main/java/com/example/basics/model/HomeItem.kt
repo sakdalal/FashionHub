@@ -15,4 +15,6 @@ sealed class HomeItem {
 
     data class ProductSection( val tabs: List<Int>,
                                val data: Map<Int, List<Product>>) : HomeItem()
+
+//    data class SearchProductSection(val products: List<Product>) : HomeItem()
 }

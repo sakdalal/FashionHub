@@ -1,6 +1,7 @@
 package com.example.basics.ui.fragment
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.example.basics.ui.activity.LoginActivity
 import com.example.basics.ui.activity.WishlistActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import androidx.core.net.toUri
 
 
 class ProfileFragment : Fragment() {
@@ -98,6 +100,13 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
+//        binding.faq.setOnClickListener {
+//            val intent = Intent(
+//                Intent.ACTION_VIEW,
+//                "https://www.myntra.com/faqs".toUri()
+//            )
+//            startActivity(intent)
+//        }
 
     }
 

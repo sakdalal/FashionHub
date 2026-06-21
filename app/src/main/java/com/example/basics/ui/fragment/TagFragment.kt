@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -37,7 +38,7 @@ class TagFragment : Fragment(), OnProductClickListener {
     private lateinit var radapter: RailAdapter
     private lateinit var homeAdapter: HomeAdapter
     private val viewModel: RailViewModel by viewModels()
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
     private lateinit var wishlistViewModel: WishlistViewModel
     private val handler = Handler(Looper.getMainLooper())

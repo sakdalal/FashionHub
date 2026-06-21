@@ -6,21 +6,31 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.MediaStore
 import android.speech.RecognizerIntent
+import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
+import androidx.fragment.app.FragmentManager
 import com.example.basics.R
+import com.example.basics.adapter.ProductAdapter
 import com.example.basics.databinding.ActivityMainBinding
 import com.example.basics.listener.OnProductClickListener
 import com.example.basics.model.Product
+import com.example.basics.ui.fragment.SearchFragment
 import com.example.basics.ui.fragment.TagFragment
+import com.example.basics.viewmodel.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private val homeViewModel: HomeViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
@@ -95,6 +105,49 @@ class MainActivity : AppCompatActivity() {
                 microphonePermissionLauncher.launch(
                     Manifest.permission.RECORD_AUDIO
                 )
+            }
+        }
+
+
+        binding.topBar.searchArea.setOnEditorActionListener { v, actionId, _ ->
+
+            if (
+                actionId == EditorInfo.IME_ACTION_SEARCH ||
+                actionId == EditorInfo.IME_ACTION_DONE
+            ) {
+
+                val query = v.text.toString()
+
+                val results = homeViewModel.search(query)
+
+                if (results.isNotEmpty()) {
+
+                    supportFragmentManager.popBackStack(
+                        "SEARCH",
+                        FragmentManager.POP_BACK_STACK_INCLUSIVE
+                    )
+
+                    supportFragmentManager.beginTransaction()
+                        .replace(
+                            R.id.fragmentContainer,
+                            SearchFragment()
+                        )
+                        .addToBackStack("SEARCH")
+                        .commit()
+                        binding.footer.root.visibility= View.GONE
+                } else {
+
+                    Toast.makeText(
+                        this,
+                        "No products found",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                true
+
+            } else {
+                false
             }
         }
 
