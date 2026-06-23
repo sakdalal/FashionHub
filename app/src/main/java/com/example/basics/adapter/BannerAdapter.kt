@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.basics.databinding.ItemBannerBinding
 import com.example.basics.databinding.ItemBannerPageBinding
-import com.example.basics.model.Banner
 import com.example.basics.databinding.TopBannerBinding
 import com.example.basics.listener.OnProductClickListener
 import com.example.basics.model.FeatureBrand

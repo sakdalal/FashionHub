@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/brandImg"
-        android:layout_width="220dp"
+        android:layout_width="0dp"
         android:layout_height="300dp"
         android:layout_marginTop="5dp"
         android:scaleType="centerCrop"
@@ -18,6 +18,8 @@
         tools:ignore="MissingConstraints"
         android:background="@drawable/rounded_bg"
         android:clipToOutline="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/brandLogo"
         />
     <ImageView
@@ -28,6 +30,7 @@
         android:layout_margin="10dp"
         app:layout_constraintEnd_toEndOf="@id/brandImg"
         app:layout_constraintTop_toTopOf="@id/brandImg"/>
+
     <TextView
         android:id="@+id/bigText"
         android:text="Up To 50% Off"
@@ -48,8 +51,8 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/brandImg"
-        app:layout_constraintStart_toStartOf="@id/brandImg"
-        app:layout_constraintEnd_toEndOf="@id/brandImg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="4dp"
         />
     <ImageView

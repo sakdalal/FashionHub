@@ -7,7 +7,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.basics.adapter.BannerAdapter
 import com.example.basics.databinding.ItemBannerBinding
 import com.example.basics.listener.OnProductClickListener
-import com.example.basics.model.Banner
 import com.example.basics.model.FeatureBrand
 
 class BannerVH(private val binding: ItemBannerBinding,listener: OnProductClickListener) :

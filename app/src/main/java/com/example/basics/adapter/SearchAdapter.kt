@@ -2,6 +2,7 @@ package com.example.basics.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.R
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +36,7 @@ class SearchAdapter: ListAdapter<FeatureBrand, SearchAdapter.MyViewHolder>(Featu
             binding.companyName.text=product.brand
             Glide.with(binding.root.context)
                 .load(product.thumbnail)
+                .placeholder(android.R.color.holo_blue_light)
                 .into(binding.productImage)
         }
 

@@ -3,10 +3,13 @@ package com.example.basics.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
 import com.example.basics.MyApplication
 import com.example.basics.databinding.ActivityProductDetailBinding
@@ -123,6 +126,21 @@ class ProductDetailActivity : AppCompatActivity() {
             WishlistViewModelFactory(wishlistRepository)
         )[WishlistViewModel::class.java]
 
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+
+                cartViewModel.cartItems.collect { items ->
+
+                    if (items.isEmpty()) {
+                        binding.productTopBar.cartBadge.visibility = View.GONE
+                    } else {
+                        binding.productTopBar.cartBadge.visibility = View.VISIBLE
+                        binding.productTopBar.cartBadge.text = items.size.toString()
+                    }
+                }
+            }
+        }
+
 
         lifecycleScope.launch {
             wishlistViewModel.wishlistItems.collect { items ->
@@ -143,7 +161,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 isInCart = items.any { it.id == product.id }
                 binding.bagText.text =
                     if (inCart) {
-                        "Go to Cart"
+                        "Go to Bag"
                     } else {
                         "Add to Cart"
                     }

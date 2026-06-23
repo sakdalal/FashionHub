@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DBDBDB"
+    android:background="#E7E7E7"
     android:fitsSystemWindows="true"
     tools:context=".ui.activity.AddressActivity">
 

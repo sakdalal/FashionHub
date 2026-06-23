@@ -1,6 +1,11 @@
 package com.example.basics.ui.fragment
 
+
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -40,6 +45,10 @@ class TagFragment : Fragment(), OnProductClickListener {
     private val viewModel: RailViewModel by viewModels()
     private val homeViewModel: HomeViewModel by activityViewModels()
 
+    private lateinit var connectivityManager: ConnectivityManager
+    private lateinit var networkCallback: ConnectivityManager.NetworkCallback
+
+
     private lateinit var wishlistViewModel: WishlistViewModel
     private val handler = Handler(Looper.getMainLooper())
 
@@ -62,8 +71,28 @@ class TagFragment : Fragment(), OnProductClickListener {
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         binding.recyclerView.adapter = homeAdapter
 
-        setupRail()
-        observeRail()
+
+        radapter = RailAdapter(this)
+        binding.railRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        binding.railRecyclerView.adapter = radapter
+
+
+        if (isInternetAvailable()) {
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.noInternet.root.visibility = View.GONE
+        } else {
+            binding.recyclerView.visibility = View.GONE
+            binding.noInternet.root.visibility = View.VISIBLE
+        }
+        registerNetworkCallback()
+
+
+
+        viewModel.rail.observe(viewLifecycleOwner) {
+            radapter.submitList(it)
+        }
+
 
         homeViewModel.feed.observe(viewLifecycleOwner) {
             Log.d("HOME_FRAGMENT", "received ${it.size}")
@@ -100,21 +129,9 @@ class TagFragment : Fragment(), OnProductClickListener {
 
     }
 
-    private fun observeRail() {
-        viewModel.rail.observe(viewLifecycleOwner) {
-            radapter.submitList(it)
-        }
-    }
-
-    private fun setupRail() {
-        radapter = RailAdapter()
-        binding.railRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        binding.railRecyclerView.adapter = radapter
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
+        connectivityManager.unregisterNetworkCallback(networkCallback)
         handler.removeCallbacksAndMessages(null)
     }
 
@@ -146,6 +163,47 @@ class TagFragment : Fragment(), OnProductClickListener {
             )
         wishlistViewModel.toggleWishlist(item)
     }
+
+    private fun registerNetworkCallback() {
+
+        connectivityManager =
+            requireContext().getSystemService(Context.CONNECTIVITY_SERVICE)
+                    as ConnectivityManager
+
+        networkCallback = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                requireActivity().runOnUiThread {
+                    binding.recyclerView.visibility = View.VISIBLE
+                    binding.railRecyclerView.visibility= View.VISIBLE
+                    binding.noInternet.root.visibility = View.GONE
+                }
+            }
+
+            override fun onLost(network: Network) {
+                requireActivity().runOnUiThread {
+                    binding.recyclerView.visibility = View.GONE
+                    binding.railRecyclerView.visibility= View.GONE
+                    binding.noInternet.root.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        connectivityManager.registerDefaultNetworkCallback(networkCallback)
+    }
+
+    private fun isInternetAvailable(): Boolean {
+        val connectivityManager =
+            requireContext().getSystemService(Context.CONNECTIVITY_SERVICE)
+                    as ConnectivityManager
+
+        val network = connectivityManager.activeNetwork ?: return false
+        val capabilities =
+            connectivityManager.getNetworkCapabilities(network) ?: return false
+
+        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    }
+
+
 
 
 }

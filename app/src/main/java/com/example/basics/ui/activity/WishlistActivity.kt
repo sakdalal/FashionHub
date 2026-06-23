@@ -7,8 +7,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.basics.MyApplication
 import com.example.basics.adapter.WishlistAdapter
@@ -82,6 +84,33 @@ class WishlistActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+        val cartRepository =
+            (application as MyApplication).cartRepository
+
+        val orderRepository =
+            (application as MyApplication).orderRepository
+
+        val cartViewModel = ViewModelProvider(
+            this,
+            CartViewModelFactory(cartRepository,orderRepository)
+        )[CartViewModel::class.java]
+
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+
+                cartViewModel.cartItems.collect { items ->
+
+                    if (items.isEmpty()) {
+                        binding.cartBadge.visibility = View.GONE
+                    } else {
+                        binding.cartBadge.visibility = View.VISIBLE
+                        binding.cartBadge.text = items.size.toString()
+                    }
+                }
+            }
+        }
 
     }
 

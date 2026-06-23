@@ -123,7 +123,8 @@ class HomeViewModel : ViewModel() {
 
                 it.title.contains(query, true) ||
                         (it.brand?.contains(query, true) == true) ||
-                        it.category.contains(query, true)
+                        it.category.contains(query, true)||
+                        it.description.contains(query, true)
             }
 
         _searchResults.value = filtered

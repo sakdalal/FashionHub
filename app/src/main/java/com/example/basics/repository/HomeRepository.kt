@@ -2,8 +2,6 @@ package com.example.basics.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.basics.model.Banner
-import com.example.basics.model.Card
 import com.example.basics.model.FeatureBrand
 import com.example.basics.model.HomeData
 import com.example.basics.model.OfferSmall
@@ -108,7 +106,7 @@ class HomeRepository {
         val dummyResponse =
             RetrofitInstance.dummyApi.getDummyProducts()
 
-        return dummyResponse.products.map {
+        val originalProducts = dummyResponse.products.map {
 
             FeatureBrand(
                 id = it.id,
@@ -128,10 +126,79 @@ class HomeRepository {
                 rating = it.rating
             )
         }
+
+        return expandedProducts(originalProducts)
     }
 
+    private val categories = listOf(
+        "Women's Fashion", "Bags", "Men's Fashion", "Footwear", "Accessories", "Jewellery", "Beauty",
+        "Skincare", "Fragrances", "Electronics", "Mobiles", "Laptops", "Smart Watches", "Gaming",
+        "Home Decor", "Furniture", "Kitchen", "Sports", "Fitness", "Books", "Toys", "Groceries",
+        "Pet Supplies", "Stationery", "Travel"
+    )
 
+    private val brands = listOf(
+        "Nike","Adidas","Puma","Reebok","Levis",
+        "Zara","H&M","Gucci","Prada","Louis Vuitton",
+        "Samsung","Apple","Sony","JBL","Boat",
+        "Fossil","Casio","Titan","RayBan","Oakley",
+        "Mamaearth","Lakme","Maybelline","Loreal","Nykaa",
+        "Ikea","Home Centre","Pepperfry","Wildcraft","Skybags",
+        "OnePlus","Asus","HP","Dell","Lenovo",
+        "Noise","FireBolt","Amazfit","Realme","Nothing"
+    )
 
+    private val productNames = listOf(
+        "Floral Dress","Maxi Dress","Party Gown","Kurti",
+        "Crop Top","Oversized T-Shirt","Formal Shirt","Denim Jacket",
+        "Slim Fit Jeans","Cargo Pants","Sneakers","Running Shoes",
+        "Leather Boots","Sports Sandals","Handbag","Shoulder Bag",
+        "Backpack","Wallet","Watch","Smart Watch",
+        "Wireless Earbuds","Bluetooth Speaker","Gaming Mouse",
+        "Mechanical Keyboard","Laptop","Smartphone","Tablet",
+        "Lipstick","Foundation","Face Wash","Perfume",
+        "Sunscreen","Moisturizer","Coffee Table","Office Chair",
+        "Dining Table","Wall Clock","Table Lamp","Yoga Mat",
+        "Dumbbells","Cricket Bat","Football","Novel",
+        "Cookbook","Toy Car","Teddy Bear","Dog Food",
+        "Cat Food","Rice Pack","Coffee Powder","Water Bottle"
+    )
+
+    private fun expandedProducts(
+        products: List<FeatureBrand>
+    ): List<FeatureBrand> {
+
+        val result = mutableListOf<FeatureBrand>()
+
+        repeat(4) { round ->
+
+            products.forEachIndexed { index, product ->
+
+                val titleIndex =
+                    (index + round * products.size) % productNames.size
+
+                val brandIndex =
+                    (index + round * products.size) % brands.size
+
+                val categoryIndex =
+                    (index + round * products.size) % categories.size
+
+                result.add(
+                    product.copy(
+                        id = product.id + (round * 10000),
+
+                        title = productNames[titleIndex],
+
+                        brand = brands[brandIndex],
+
+                        category = categories[categoryIndex]
+                    )
+                )
+            }
+        }
+
+        return result
+    }
 
 
 }

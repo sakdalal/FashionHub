@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.basics.adapter.CardAdapter
 import com.example.basics.databinding.ItemSectionBinding
 import com.example.basics.listener.OnProductClickListener
-import com.example.basics.model.Card
 import com.example.basics.model.FeatureBrand
 
 class CardSectionVH(private val binding: ItemSectionBinding,listener: OnProductClickListener) :

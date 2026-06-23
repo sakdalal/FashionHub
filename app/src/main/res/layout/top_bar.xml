@@ -43,9 +43,9 @@
             android:textColor="#3B3B3B"
             android:focusableInTouchMode="true"
             android:clickable="true"
-            android:textColorHint="#696969"
+            android:textColorHint="#DBDBDB"
             android:paddingLeft="10dp"
-            android:hint="Search..." />
+            android:hint="  &quot;tables....&quot; " />
 
     </LinearLayout>
 

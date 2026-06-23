@@ -1,6 +1,7 @@
 package com.example.basics.ui.activity
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -16,6 +17,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.example.basics.MyApplication
 import com.example.basics.R
 import com.example.basics.adapter.ProductAdapter
 import com.example.basics.databinding.ActivityMainBinding
@@ -23,13 +29,17 @@ import com.example.basics.listener.OnProductClickListener
 import com.example.basics.model.Product
 import com.example.basics.ui.fragment.SearchFragment
 import com.example.basics.ui.fragment.TagFragment
+import com.example.basics.viewmodel.CartViewModel
+import com.example.basics.viewmodel.CartViewModelFactory
 import com.example.basics.viewmodel.HomeViewModel
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     private val homeViewModel: HomeViewModel by viewModels()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -37,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, true)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -110,23 +121,17 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.topBar.searchArea.setOnEditorActionListener { v, actionId, _ ->
-
             if (
                 actionId == EditorInfo.IME_ACTION_SEARCH ||
                 actionId == EditorInfo.IME_ACTION_DONE
             ) {
-
                 val query = v.text.toString()
-
                 val results = homeViewModel.search(query)
-
                 if (results.isNotEmpty()) {
-
                     supportFragmentManager.popBackStack(
                         "SEARCH",
                         FragmentManager.POP_BACK_STACK_INCLUSIVE
                     )
-
                     supportFragmentManager.beginTransaction()
                         .replace(
                             R.id.fragmentContainer,
@@ -136,18 +141,53 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                         binding.footer.root.visibility= View.GONE
                 } else {
-
                     Toast.makeText(
                         this,
                         "No products found",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
                 true
 
             } else {
                 false
+            }
+        }
+
+//        val cartItems=cartViewModel.cartItems
+
+        val repository =
+            (application as MyApplication).cartRepository
+
+        val orderRepository =
+            (application as MyApplication).orderRepository
+
+        val cartViewModel = ViewModelProvider(
+            this,
+            CartViewModelFactory(repository,orderRepository)
+        )[CartViewModel::class.java]
+
+
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                cartViewModel.cartItems.collect { items ->
+                    val badge =
+                        binding.footer.bottomNav.getOrCreateBadge(R.id.bag)
+
+                    badge.backgroundColor =
+                        ContextCompat.getColor(this@MainActivity, R.color.pink)
+
+                    badge.badgeTextColor =
+                        ContextCompat.getColor(this@MainActivity, R.color.white)
+
+                    if (items.isEmpty()) {
+                        badge.isVisible = false
+                    } else {
+                        badge.isVisible = true
+                        badge.number = items.size
+                    }
+                }
             }
         }
 
