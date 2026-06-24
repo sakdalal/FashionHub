@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.basics.databinding.FragmentHomeBinding
 
+
+// CURRENTLY NOT IN USE
+
 class HomeFragment : Fragment(){
     private lateinit var binding: FragmentHomeBinding
 
@@ -21,9 +24,9 @@ class HomeFragment : Fragment(){
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//    }
 
 
 }
