@@ -3,13 +3,10 @@ package com.example.basics.adapter
 import android.R
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.basics.databinding.ItemBannerBinding
 import com.example.basics.databinding.ItemBannerPageBinding
-import com.example.basics.databinding.TopBannerBinding
 import com.example.basics.listener.OnProductClickListener
 import com.example.basics.model.FeatureBrand
 
@@ -27,6 +24,7 @@ class BannerAdapter(private val listener: OnProductClickListener): ListAdapter<F
         fun bind(banner: FeatureBrand){
             binding.bigText.text=banner.title
             binding.smallText.text=banner.discountPercentage
+            binding.bannerImage.setImageResource(android.R.drawable.ic_menu_view)
             Glide.with(binding.root.context)
                 .load(banner.thumbnail)
                 .placeholder(R.color.holo_blue_light)

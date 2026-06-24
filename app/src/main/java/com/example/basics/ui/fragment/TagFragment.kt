@@ -70,12 +70,14 @@ class TagFragment : Fragment(), OnProductClickListener {
         binding.recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         binding.recyclerView.adapter = homeAdapter
+        binding.recyclerView.setHasFixedSize(true)
 
 
         radapter = RailAdapter(this)
         binding.railRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         binding.railRecyclerView.adapter = radapter
+        binding.railRecyclerView.setHasFixedSize(true)
 
 
         if (isInternetAvailable()) {
@@ -123,7 +125,7 @@ class TagFragment : Fragment(), OnProductClickListener {
                 val ids = items.map {
                     it.id
                 }.toSet()
-                homeAdapter.updateWishlist(ids)
+//                homeAdapter.updateWishlist(ids)
             }
         }
 

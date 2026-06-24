@@ -9,10 +9,9 @@ import com.example.basics.databinding.ItemBannerBinding
 import com.example.basics.listener.OnProductClickListener
 import com.example.basics.model.FeatureBrand
 
-class BannerVH(private val binding: ItemBannerBinding,listener: OnProductClickListener) :
+class BannerVH(private val binding: ItemBannerBinding,listener: OnProductClickListener, sharedPool: RecyclerView.RecycledViewPool) :
     RecyclerView.ViewHolder(binding.root) {
         private val bannerAdapter= BannerAdapter(listener)
-
         private val handler= Handler(Looper.getMainLooper())
 
         private val autoScrollRunnable= object: Runnable{
@@ -43,9 +42,5 @@ class BannerVH(private val binding: ItemBannerBinding,listener: OnProductClickLi
         if (banners.size > 1) {
             handler.postDelayed(autoScrollRunnable, 5000)
         }
-    }
-
-    fun stopAutoScroll() {
-        handler.removeCallbacks(autoScrollRunnable)
     }
 }

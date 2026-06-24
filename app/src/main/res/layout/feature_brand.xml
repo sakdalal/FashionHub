@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginStart="6dp"
+    android:layout_marginEnd="6dp"
     android:background="@drawable/border"
     android:padding="1dp">
 
@@ -12,7 +14,6 @@
         android:id="@+id/brandImg"
         android:layout_width="0dp"
         android:layout_height="300dp"
-        android:layout_marginTop="5dp"
         android:scaleType="centerCrop"
         android:src="@drawable/dress"
         tools:ignore="MissingConstraints"
@@ -20,6 +21,7 @@
         android:clipToOutline="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/brandLogo"
         />
     <ImageView

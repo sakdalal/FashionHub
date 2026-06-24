@@ -6,7 +6,7 @@ import com.example.basics.adapter.OfferAdapter
 import com.example.basics.databinding.ItemSectionBinding
 import com.example.basics.model.OfferSmall
 
-class OfferSectionVH(private val binding: ItemSectionBinding) :
+class OfferSectionVH(private val binding: ItemSectionBinding, sharedPool: RecyclerView.RecycledViewPool) :
     RecyclerView.ViewHolder(binding.root) {
 
     private val offerAdapter = OfferAdapter()
@@ -15,6 +15,9 @@ class OfferSectionVH(private val binding: ItemSectionBinding) :
         binding.recyclerView.layoutManager =
             LinearLayoutManager(binding.root.context, RecyclerView.HORIZONTAL, false)
         binding.recyclerView.adapter=offerAdapter
+        binding.recyclerView.setRecycledViewPool(sharedPool)
+        binding.recyclerView.setItemViewCacheSize(10)
+        binding.recyclerView.isNestedScrollingEnabled = false
     }
 
     fun bind(offers: List<OfferSmall>) {

@@ -6,15 +6,17 @@ import com.example.basics.adapter.SellerAdapter
 import com.example.basics.databinding.ItemSectionBinding
 import com.example.basics.model.Seller
 
-class SellerSectionVH(private val binding: ItemSectionBinding) :
+class SellerSectionVH(private val binding: ItemSectionBinding, sharedPool: RecyclerView.RecycledViewPool) :
     RecyclerView.ViewHolder(binding.root) {
-
         private val sellerAdapter= SellerAdapter()
 
         init {
             binding.recyclerView.layoutManager =
                 LinearLayoutManager(binding.root.context, RecyclerView.HORIZONTAL, false)
             binding.recyclerView.adapter=sellerAdapter
+            binding.recyclerView.setRecycledViewPool(sharedPool)
+            binding.recyclerView.setItemViewCacheSize(10)
+            binding.recyclerView.isNestedScrollingEnabled = false
         }
 
     fun bind(seller: List<Seller>) {

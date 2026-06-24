@@ -29,6 +29,7 @@ class FeatureBrandAdapter(private val listener: OnProductClickListener): ListAda
         fun bind(featureBrand: FeatureBrand,listener: OnProductClickListener,isWishlisted: Boolean){
             binding.bigText.text=featureBrand.discountPercentage
             binding.smallText.text=featureBrand.title
+            binding.brandImg.setImageResource(android.R.drawable.ic_menu_gallery)
             Glide.with(binding.root.context)
                 .load(featureBrand.thumbnail)
                 .into(binding.brandImg)

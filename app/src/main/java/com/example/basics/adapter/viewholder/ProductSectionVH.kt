@@ -11,7 +11,7 @@ import com.example.basics.listener.OnProductClickListener
 import com.example.basics.model.HomeItem
 import com.google.android.material.tabs.TabLayout
 
-class ProductSectionVH(private val binding: ItemProductSectionBinding) :
+class ProductSectionVH(private val binding: ItemProductSectionBinding, sharedPool: RecyclerView.RecycledViewPool) :
     RecyclerView.ViewHolder(binding.root) {
     private val adapter = ProductAdapter()
     private var tabsInitialized = false
@@ -20,8 +20,9 @@ class ProductSectionVH(private val binding: ItemProductSectionBinding) :
         binding.productRecycler.layoutManager =
             GridLayoutManager(binding.root.context, 2)
         binding.productRecycler.adapter = adapter
+        binding.productRecycler.setRecycledViewPool(sharedPool)
         binding.productRecycler.setHasFixedSize(true)
-
+        binding.productRecycler.setItemViewCacheSize(20)
         binding.productRecycler.isNestedScrollingEnabled = false
     }
     fun bind(item: HomeItem.ProductSection) {

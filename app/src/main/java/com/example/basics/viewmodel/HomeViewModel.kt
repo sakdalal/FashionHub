@@ -58,7 +58,7 @@ class HomeViewModel : ViewModel() {
                 Log.d("HOME_VM", "offers ${data.offers.size}")
                 Log.d("HOME_VM", "feature ${data.featureBrands.size}")
                 Log.d("HOME_VM", "seller ${data.bestSellers.size}")
-                Log.d("HOME_VM", "products ${data.products.size}")
+//                Log.d("HOME_VM", "products ${data.products.size}")
 
                 val mappedData = mapOf(
                     0 to data.products.take(6),
@@ -74,7 +74,8 @@ class HomeViewModel : ViewModel() {
 
                     HomeItem.BannerSection(
                         banners = data.banners
-                    ),
+                    )
+                    ,
                     HomeItem.CardSection(
                         cards = data.cards
                     ),

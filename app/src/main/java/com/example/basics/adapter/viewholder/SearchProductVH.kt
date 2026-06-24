@@ -8,7 +8,8 @@ import com.example.basics.databinding.ItemProductSectionBinding
 import com.example.basics.model.Product
 
 class SearchProductVH(
-    private val binding: ItemProductSectionBinding
+    private val binding: ItemProductSectionBinding,
+    sharedPool: RecyclerView.RecycledViewPool
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val adapter = ProductAdapter()
@@ -18,6 +19,9 @@ class SearchProductVH(
             GridLayoutManager(binding.root.context, 2)
 
         binding.productRecycler.adapter = adapter
+        binding.productRecycler.setRecycledViewPool(sharedPool)
+        binding.productRecycler.setItemViewCacheSize(10)
+        binding.productRecycler.isNestedScrollingEnabled = false
 
         binding.tabsLayout.visibility = View.GONE
     }
