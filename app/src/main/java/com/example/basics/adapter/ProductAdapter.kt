@@ -3,7 +3,6 @@ package com.example.basics.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.R
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -31,6 +30,7 @@ class ProductAdapter: ListAdapter<Product, ProductAdapter.ViewHolder>(ProductDif
             binding.bestPrice.text=product.price
             Glide.with(binding.root.context)
                 .load(product.image)
+                .fitCenter()
                 .into(binding.productImage)
 
 

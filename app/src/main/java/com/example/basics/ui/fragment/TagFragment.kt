@@ -65,7 +65,7 @@ class TagFragment : Fragment(), OnProductClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         Log.d("HOME_FRAGMENT", "on view created")
-        homeAdapter = HomeAdapter(emptyList(), this)
+        homeAdapter = HomeAdapter( this)
 
         binding.recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -98,7 +98,8 @@ class TagFragment : Fragment(), OnProductClickListener {
 
         homeViewModel.feed.observe(viewLifecycleOwner) {
             Log.d("HOME_FRAGMENT", "received ${it.size}")
-            homeAdapter.updateList(it)
+//            homeAdapter.updateList(it)
+            homeAdapter.submitList(it)
             Log.d("HOME_FRAGMENT", "submitList called")
         }
 
@@ -125,7 +126,7 @@ class TagFragment : Fragment(), OnProductClickListener {
                 val ids = items.map {
                     it.id
                 }.toSet()
-//                homeAdapter.updateWishlist(ids)
+                homeAdapter.updateWishlist(ids)
             }
         }
 

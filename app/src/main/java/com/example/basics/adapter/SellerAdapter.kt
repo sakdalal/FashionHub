@@ -26,6 +26,7 @@ class SellerAdapter: ListAdapter<Seller, SellerAdapter.ViewHolder>(SellerDiffCal
             binding.sellText.text=seller.price
             Glide.with(binding.root.context)
                 .load(seller.image)
+                .override(540,750)
                 .placeholder(R.color.holo_blue_light)
                 .into(binding.sellImage)
         }

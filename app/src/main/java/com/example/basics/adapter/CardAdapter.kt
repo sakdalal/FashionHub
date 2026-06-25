@@ -27,8 +27,6 @@ class CardAdapter(private val listener: OnProductClickListener): ListAdapter<Fea
                 .load(card.thumbnail)
                 .placeholder(R.color.holo_green_light)
                 .into(binding.cardImg)
-
-
             binding.root.setOnClickListener {
                 listener.onProductClick(card)
             }

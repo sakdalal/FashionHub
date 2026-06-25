@@ -24,6 +24,7 @@ class OfferAdapter: ListAdapter<OfferSmall, OfferAdapter.ViewHolder>(OfferDiffCa
 //            binding.offerImg.setImageResource(R.drawable.perfume)
             Glide.with(binding.root.context)
                 .load(offer.image)
+                .override(300,510)
                 .placeholder(R.color.darker_gray)
                 .into(binding.offerImg)
         }

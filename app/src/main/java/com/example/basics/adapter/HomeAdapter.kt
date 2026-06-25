@@ -3,6 +3,7 @@ package com.example.basics.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basics.R
 import com.example.basics.adapter.viewholder.BannerVH
@@ -18,8 +19,8 @@ import com.example.basics.listener.OnProductClickListener
 import com.example.basics.model.HomeItem
 import java.util.Collections
 
-class HomeAdapter(private var list: List<HomeItem>, private val listener: OnProductClickListener) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeAdapter(private val listener: OnProductClickListener) :
+    ListAdapter<HomeItem, RecyclerView.ViewHolder>(HomeDiffCallBack()) {
 
     private var wishlistedIds = emptySet<Int>()
     private val sharedPool = RecyclerView.RecycledViewPool()
@@ -32,7 +33,7 @@ class HomeAdapter(private var list: List<HomeItem>, private val listener: OnProd
 //            "type position=$position item=${list[position]::class.java.simpleName}"
 //        )
 
-        return when (list[position]) {
+        return when (currentList[position]) {
             is HomeItem.BannerSection -> 0
             is HomeItem.CardSection -> 1
             is HomeItem.FeatureBrandSection -> 2
@@ -69,7 +70,7 @@ class HomeAdapter(private var list: List<HomeItem>, private val listener: OnProd
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = list[position]
+        val item = currentList[position]
 //        Log.d(
 //            "HOME_ADAPTER",
 //            "bind position=$position holder=${holder::class.java.simpleName}"
@@ -96,15 +97,18 @@ class HomeAdapter(private var list: List<HomeItem>, private val listener: OnProd
 
 //        Log.d("COUNT", list.size.toString())
 
-        return list.size
+        return currentList.size
     }
 
     fun updateWishlist(ids: Set<Int>) {
-        wishlistedIds = ids
-        notifyDataSetChanged()
+    wishlistedIds = ids
+
+    val position = currentList.indexOfFirst {
+        it is HomeItem.FeatureBrandSection
     }
-    fun updateList(newList: List<HomeItem>) {
-        list = newList
-        notifyDataSetChanged()
+
+    if (position != -1) {
+        notifyItemChanged(position)
     }
+}
 }
