@@ -13,6 +13,9 @@ import com.example.basics.adapter.viewholder.OfferSectionVH
 import com.example.basics.adapter.viewholder.ProductSectionVH
 import com.example.basics.adapter.viewholder.SellerSectionVH
 import com.example.basics.databinding.ItemBannerBinding
+import com.example.basics.databinding.ItemBestsellerBinding
+import com.example.basics.databinding.ItemFeatureBrandBinding
+import com.example.basics.databinding.ItemOfferBinding
 import com.example.basics.databinding.ItemProductSectionBinding
 import com.example.basics.databinding.ItemSectionBinding
 import com.example.basics.listener.OnProductClickListener
@@ -24,7 +27,6 @@ class HomeAdapter(private val listener: OnProductClickListener) :
 
     private var wishlistedIds = emptySet<Int>()
     private val sharedPool = RecyclerView.RecycledViewPool()
-
 
 
     override fun getItemViewType(position: Int): Int {
@@ -52,18 +54,23 @@ class HomeAdapter(private val listener: OnProductClickListener) :
         return when (viewType) {
 
 
-            0 -> BannerVH(ItemBannerBinding.inflate(inflater, parent, false),listener,sharedPool)
+            0 -> BannerVH(ItemBannerBinding.inflate(inflater, parent, false), listener, sharedPool)
             1 -> CardSectionVH(
                 ItemSectionBinding.inflate(inflater, parent, false),
-                listener,sharedPool)
-            2 -> FeatureBrandSectionVH(
-                ItemSectionBinding.inflate(inflater, parent, false),
-                listener,sharedPool
+                listener, sharedPool
             )
 
-            3 -> OfferSectionVH(ItemSectionBinding.inflate(inflater, parent, false),sharedPool)
-            4 -> SellerSectionVH(ItemSectionBinding.inflate(inflater, parent, false),sharedPool)
-            5 -> ProductSectionVH(ItemProductSectionBinding.inflate(inflater, parent, false),sharedPool)
+            2 -> FeatureBrandSectionVH(
+                ItemFeatureBrandBinding.inflate(inflater, parent, false),
+                listener, sharedPool
+            )
+
+            3 -> OfferSectionVH(ItemOfferBinding.inflate(inflater, parent, false), sharedPool)
+            4 -> SellerSectionVH(ItemBestsellerBinding.inflate(inflater, parent, false), sharedPool)
+            5 -> ProductSectionVH(
+                ItemProductSectionBinding.inflate(inflater, parent, false),
+                sharedPool
+            )
 
             else -> throw Exception()
         }
@@ -81,7 +88,10 @@ class HomeAdapter(private val listener: OnProductClickListener) :
 
             is CardSectionVH -> holder.bind((item as HomeItem.CardSection).cards)
 
-            is FeatureBrandSectionVH -> holder.bind((item as HomeItem.FeatureBrandSection).featureBrands,wishlistedIds)
+            is FeatureBrandSectionVH -> holder.bind(
+                (item as HomeItem.FeatureBrandSection).featureBrands,
+                wishlistedIds
+            )
 
             is OfferSectionVH -> holder.bind((item as HomeItem.OfferSection).offers)
 
@@ -94,21 +104,18 @@ class HomeAdapter(private val listener: OnProductClickListener) :
     }
 
     override fun getItemCount(): Int {
-
-//        Log.d("COUNT", list.size.toString())
-
         return currentList.size
     }
 
     fun updateWishlist(ids: Set<Int>) {
-    wishlistedIds = ids
+        wishlistedIds = ids
 
-    val position = currentList.indexOfFirst {
-        it is HomeItem.FeatureBrandSection
-    }
+        val position = currentList.indexOfFirst {
+            it is HomeItem.FeatureBrandSection
+        }
 
-    if (position != -1) {
-        notifyItemChanged(position)
+        if (position != -1) {
+            notifyItemChanged(position)
+        }
     }
-}
 }

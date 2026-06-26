@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/shirt"
+        android:textColor="#696969"
         app:layout_constraintTop_toBottomOf="@+id/cardImg"
         app:layout_constraintStart_toStartOf="@id/cardImg"
         app:layout_constraintEnd_toEndOf="@id/cardImg"

@@ -14,7 +14,7 @@ import com.google.android.material.tabs.TabLayout
 class ProductSectionVH(private val binding: ItemProductSectionBinding, sharedPool: RecyclerView.RecycledViewPool) :
     RecyclerView.ViewHolder(binding.root) {
     private val adapter = ProductAdapter()
-    private var tabsInitialized = false
+//    private var tabsInitialized = false
 
     init{
         binding.productRecycler.layoutManager =
@@ -28,7 +28,6 @@ class ProductSectionVH(private val binding: ItemProductSectionBinding, sharedPoo
     fun bind(item: HomeItem.ProductSection) {
         adapter.submitList(item.data[0] ?: emptyList())
         binding.tabsLayout.removeAllTabs()
-        if(!tabsInitialized) {
             item.tabs.forEach { imageRes ->
                 val tab = binding.tabsLayout.newTab()
                 val view = LayoutInflater.from(binding.root.context)
@@ -56,7 +55,7 @@ class ProductSectionVH(private val binding: ItemProductSectionBinding, sharedPoo
                     override fun onTabReselected(tab: TabLayout.Tab) {}
                 }
             )
-            tabsInitialized = true
-        }
+
+
     }
 }

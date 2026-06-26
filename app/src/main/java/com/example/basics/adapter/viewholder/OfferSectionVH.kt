@@ -3,10 +3,11 @@ package com.example.basics.adapter.viewholder
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basics.adapter.OfferAdapter
+import com.example.basics.databinding.ItemOfferBinding
 import com.example.basics.databinding.ItemSectionBinding
 import com.example.basics.model.OfferSmall
 
-class OfferSectionVH(private val binding: ItemSectionBinding, sharedPool: RecyclerView.RecycledViewPool) :
+class OfferSectionVH(private val binding: ItemOfferBinding, sharedPool: RecyclerView.RecycledViewPool) :
     RecyclerView.ViewHolder(binding.root) {
 
     private val offerAdapter = OfferAdapter()

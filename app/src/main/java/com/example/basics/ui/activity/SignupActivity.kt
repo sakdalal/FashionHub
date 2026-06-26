@@ -86,7 +86,7 @@ class SignupActivity : AppCompatActivity() {
                         startActivity(
                             Intent(
                                 this,
-                                MainActivity::class.java
+                                LoginActivity::class.java
                             )
                         )
                         finish()

@@ -33,13 +33,15 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding= FragmentProfileBinding.inflate(inflater,container,false)
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.shimmerLayout.startShimmer()
+        binding.profileName.visibility = View.GONE
 
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
 
@@ -55,6 +57,9 @@ class ProfileFragment : Fragment() {
             .addOnFailureListener {
                 Log.e("PROFILE", "Error", it)
             }
+        binding.shimmerLayout.stopShimmer()
+        binding.shimmerLayout.visibility = View.GONE
+        binding.profileName.visibility = View.VISIBLE
 
         binding.wishlistArrow.setOnClickListener {
             startActivity(Intent(requireContext(), WishlistActivity::class.java))
@@ -76,15 +81,15 @@ class ProfileFragment : Fragment() {
         }
 
         binding.manageArrow.setOnClickListener {
-            binding.manageArrowTwo.visibility= View.VISIBLE
-            binding.manageArrow.visibility= View.GONE
-            binding.manageExtra.root.visibility= View.VISIBLE
+            binding.manageArrowTwo.visibility = View.VISIBLE
+            binding.manageArrow.visibility = View.GONE
+            binding.manageExtra.root.visibility = View.VISIBLE
         }
 
         binding.manageArrowTwo.setOnClickListener {
-            binding.manageArrowTwo.visibility= View.GONE
-            binding.manageArrow.visibility= View.VISIBLE
-            binding.manageExtra.root.visibility= View.GONE
+            binding.manageArrowTwo.visibility = View.GONE
+            binding.manageArrow.visibility = View.VISIBLE
+            binding.manageExtra.root.visibility = View.GONE
         }
 
         binding.manageExtra.accountDetailsBox.setOnClickListener {
@@ -95,7 +100,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.manageExtra.addressBox.setOnClickListener {
-            val intent=Intent(requireContext(), AddressActivity::class.java)
+            val intent = Intent(requireContext(), AddressActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
             startActivity(intent)
         }
