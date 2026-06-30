@@ -30,6 +30,7 @@ import com.example.basics.db.WishlistEntity
 import com.example.basics.listener.OnProductClickListener
 import com.example.basics.model.FeatureBrand
 import com.example.basics.model.Product
+import com.example.basics.model.toFeatureBrand
 import com.example.basics.repository.WishlistRepository
 import com.example.basics.viewmodel.HomeViewModel
 import com.example.basics.viewmodel.RailViewModel
@@ -151,6 +152,21 @@ class TagFragment : Fragment(), OnProductClickListener {
             product
         )
         startActivity(intent)
+    }
+
+    override fun onOtherProductClick(product: Product) {
+
+        val featureProduct=product.toFeatureBrand()
+        val intent = Intent(
+            requireContext(),
+            ProductDetailActivity::class.java
+        )
+        intent.putExtra(
+            "PRODUCT",
+            featureProduct
+        )
+        startActivity(intent)
+
     }
 
     override fun onWishlistClick(product: FeatureBrand) {

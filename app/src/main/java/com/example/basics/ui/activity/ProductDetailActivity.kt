@@ -128,9 +128,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-
                 cartViewModel.cartItems.collect { items ->
-
                     if (items.isEmpty()) {
                         binding.productTopBar.cartBadge.visibility = View.GONE
                     } else {

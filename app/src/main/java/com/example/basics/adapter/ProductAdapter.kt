@@ -10,7 +10,7 @@ import com.example.basics.model.Product
 import com.example.basics.databinding.ProductBinding
 import com.example.basics.listener.OnProductClickListener
 
-class ProductAdapter: ListAdapter<Product, ProductAdapter.ViewHolder>(ProductDiffCallBack()) {
+class ProductAdapter(private val listener: OnProductClickListener): ListAdapter<Product, ProductAdapter.ViewHolder>(ProductDiffCallBack()) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -20,11 +20,11 @@ class ProductAdapter: ListAdapter<Product, ProductAdapter.ViewHolder>(ProductDif
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position),listener)
 
     }
     class ViewHolder(val binding: ProductBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(product: Product){
+        fun bind(product: Product,listener: OnProductClickListener){
             binding.productName.text=product.name
             binding.companyName.text=product.manufacturer
             binding.bestPrice.text=product.price
@@ -33,7 +33,9 @@ class ProductAdapter: ListAdapter<Product, ProductAdapter.ViewHolder>(ProductDif
                 .fitCenter()
                 .into(binding.productImage)
 
-
+            binding.root.setOnClickListener {
+                listener.onOtherProductClick(product)
+            }
         }
 
     }

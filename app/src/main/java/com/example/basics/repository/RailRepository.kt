@@ -12,7 +12,6 @@ class RailRepository {
                 title = it.title,
                 discountPercentage = "UpTo ${it.discountPercentage}% Off",
                 thumbnail = it.thumbnail,
-                image = it.image,
                 category = it.category,
                 price = "$ ${it.price}",
                 availabilityStatus = it.availabilityStatus,

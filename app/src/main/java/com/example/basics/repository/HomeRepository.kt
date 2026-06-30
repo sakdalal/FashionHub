@@ -1,7 +1,5 @@
 package com.example.basics.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.basics.model.FeatureBrand
 import com.example.basics.model.HomeData
 import com.example.basics.model.OfferSmall
@@ -23,7 +21,6 @@ class HomeRepository {
                     title = it.title,
                     discountPercentage = "UpTo ${it.discountPercentage}% Off",
                     thumbnail = it.thumbnail,
-                    image = it.image,
                     category = it.category,
                     price = "$ ${it.price}",
                     availabilityStatus = it.availabilityStatus,
@@ -42,7 +39,6 @@ class HomeRepository {
                     title = it.title,
                     discountPercentage = "UpTo ${it.discountPercentage}% Off",
                     thumbnail = it.thumbnail,
-                    image = it.image,
                     category = it.category,
                     price = "$ ${it.price}",
                     availabilityStatus = it.availabilityStatus,
@@ -67,7 +63,6 @@ class HomeRepository {
                     title = it.title,
                     discountPercentage = "UpTo ${it.discountPercentage}% Off",
                     thumbnail = it.thumbnail,
-                    image = it.image,
                     category = it.category,
                     price = "$ ${it.price}",
                     availabilityStatus = it.availabilityStatus,
@@ -94,7 +89,8 @@ class HomeRepository {
                 image = it.image,
                 manufacturer = it.manufacturer,
                 name = it.name,
-                price = "Best Price $${it.price}"
+                price = "Best Price $${it.price}",
+                description = it.description
             )
             }
         )
@@ -113,7 +109,6 @@ class HomeRepository {
                 title = it.title,
                 discountPercentage = it.discountPercentage,
                 thumbnail = it.thumbnail,
-                image = it.image,
                 category = it.category,
                 price = it.price,
                 availabilityStatus = it.availabilityStatus,

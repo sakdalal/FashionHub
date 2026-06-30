@@ -5,14 +5,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basics.adapter.ProductAdapter
 import com.example.basics.databinding.ItemProductSectionBinding
+import com.example.basics.listener.OnProductClickListener
 import com.example.basics.model.Product
 
 class SearchProductVH(
     private val binding: ItemProductSectionBinding,
+    private val listener: OnProductClickListener,
     sharedPool: RecyclerView.RecycledViewPool
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    private val adapter = ProductAdapter()
+    private val adapter = ProductAdapter(listener)
 
     init {
         binding.productRecycler.layoutManager =

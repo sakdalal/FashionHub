@@ -11,9 +11,9 @@ import com.example.basics.listener.OnProductClickListener
 import com.example.basics.model.HomeItem
 import com.google.android.material.tabs.TabLayout
 
-class ProductSectionVH(private val binding: ItemProductSectionBinding, sharedPool: RecyclerView.RecycledViewPool) :
+class ProductSectionVH(private val binding: ItemProductSectionBinding,private val listener: OnProductClickListener , sharedPool: RecyclerView.RecycledViewPool) :
     RecyclerView.ViewHolder(binding.root) {
-    private val adapter = ProductAdapter()
+    private val adapter = ProductAdapter(listener)
 //    private var tabsInitialized = false
 
     init{

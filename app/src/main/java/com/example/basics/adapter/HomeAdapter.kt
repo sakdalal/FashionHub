@@ -21,6 +21,7 @@ import com.example.basics.databinding.ItemSectionBinding
 import com.example.basics.listener.OnProductClickListener
 import com.example.basics.model.HomeItem
 import java.util.Collections
+import java.util.Collections.list
 
 class HomeAdapter(private val listener: OnProductClickListener) :
     ListAdapter<HomeItem, RecyclerView.ViewHolder>(HomeDiffCallBack()) {
@@ -50,7 +51,7 @@ class HomeAdapter(private val listener: OnProductClickListener) :
             : RecyclerView.ViewHolder {
 
         val inflater = LayoutInflater.from(parent.context)
-//        Log.d("HOME_ADAPTER", "create holder type=$viewType")
+        Log.d("HOME_ADAPTER", "create holder type=$viewType")
         return when (viewType) {
 
 
@@ -68,8 +69,7 @@ class HomeAdapter(private val listener: OnProductClickListener) :
             3 -> OfferSectionVH(ItemOfferBinding.inflate(inflater, parent, false), sharedPool)
             4 -> SellerSectionVH(ItemBestsellerBinding.inflate(inflater, parent, false), sharedPool)
             5 -> ProductSectionVH(
-                ItemProductSectionBinding.inflate(inflater, parent, false),
-                sharedPool
+                ItemProductSectionBinding.inflate(inflater, parent, false),listener, sharedPool
             )
 
             else -> throw Exception()
@@ -78,10 +78,10 @@ class HomeAdapter(private val listener: OnProductClickListener) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = currentList[position]
-//        Log.d(
-//            "HOME_ADAPTER",
-//            "bind position=$position holder=${holder::class.java.simpleName}"
-//        )
+        Log.d(
+            "HOME_ADAPTER",
+            "bind position=$position holder=${holder::class.java.simpleName}"
+        )
         when (holder) {
 
             is BannerVH -> holder.bind((item as HomeItem.BannerSection).banners)
