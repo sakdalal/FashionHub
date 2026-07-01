@@ -52,9 +52,13 @@ class HomeRepository {
                 )
             },
             offers = fakeryResponse.take(6).map {
-                OfferSmall(
-                    id=it.id,
-                    image = it.image
+                Product(
+                    id = it.id,
+                    image = it.image,
+                    manufacturer = it.manufacturer,
+                    name = it.name,
+                    price = "Best Price $${it.price}",
+                    description = it.description
                 )
             },
             featureBrands = dummyResponse.products.drop(10).take(5).map {
@@ -76,12 +80,14 @@ class HomeRepository {
                 )
             },
             bestSellers = fakeryResponse.drop(6).take(6).map{
-                Seller(
-                id = it.id,
-                name = it.name,
-                image = it.image,
-                price = "Under $${it.price}"
-            )
+                Product(
+                    id = it.id,
+                    image = it.image,
+                    manufacturer = it.manufacturer,
+                    name = it.name,
+                    price = "Best Price $${it.price}",
+                    description = it.description
+                )
             },
             products = fakeryResponse.drop(12).map{
                 Product(

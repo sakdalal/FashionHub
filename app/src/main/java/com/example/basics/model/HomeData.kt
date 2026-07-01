@@ -5,11 +5,11 @@ data class HomeData (
 
     val cards: List<FeatureBrand>,
 
-    val offers: List<OfferSmall>,
+    val offers: List<Product>,
 
     val featureBrands: List<FeatureBrand>,
 
-    val bestSellers: List<Seller>,
+    val bestSellers: List<Product>,
 
     val products: List<Product>,
 

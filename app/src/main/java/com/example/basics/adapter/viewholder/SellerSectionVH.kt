@@ -5,11 +5,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.basics.adapter.SellerAdapter
 import com.example.basics.databinding.ItemBestsellerBinding
 import com.example.basics.databinding.ItemSectionBinding
+import com.example.basics.listener.OnProductClickListener
+import com.example.basics.model.Product
 import com.example.basics.model.Seller
 
-class SellerSectionVH(private val binding: ItemBestsellerBinding, sharedPool: RecyclerView.RecycledViewPool) :
+class SellerSectionVH(private val binding: ItemBestsellerBinding, private val listener: OnProductClickListener, sharedPool: RecyclerView.RecycledViewPool) :
     RecyclerView.ViewHolder(binding.root) {
-        private val sellerAdapter= SellerAdapter()
+        private val sellerAdapter= SellerAdapter(listener)
 
         init {
             binding.recyclerView.layoutManager =
@@ -20,7 +22,7 @@ class SellerSectionVH(private val binding: ItemBestsellerBinding, sharedPool: Re
             binding.recyclerView.isNestedScrollingEnabled = false
         }
 
-    fun bind(seller: List<Seller>) {
+    fun bind(seller: List<Product>) {
         sellerAdapter.submitList(seller)
     }
 }

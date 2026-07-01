@@ -66,8 +66,8 @@ class HomeAdapter(private val listener: OnProductClickListener) :
                 listener, sharedPool
             )
 
-            3 -> OfferSectionVH(ItemOfferBinding.inflate(inflater, parent, false), sharedPool)
-            4 -> SellerSectionVH(ItemBestsellerBinding.inflate(inflater, parent, false), sharedPool)
+            3 -> OfferSectionVH(ItemOfferBinding.inflate(inflater, parent, false),listener, sharedPool)
+            4 -> SellerSectionVH(ItemBestsellerBinding.inflate(inflater, parent, false),listener, sharedPool)
             5 -> ProductSectionVH(
                 ItemProductSectionBinding.inflate(inflater, parent, false),listener, sharedPool
             )

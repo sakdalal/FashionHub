@@ -2,6 +2,7 @@ package com.example.basics.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.basics.model.OfferSmall
+import com.example.basics.model.Product
 
 class OfferDiffCallBack: DiffUtil.ItemCallback<OfferSmall>() {
     override fun areItemsTheSame(

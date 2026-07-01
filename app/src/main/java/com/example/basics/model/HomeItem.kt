@@ -9,9 +9,9 @@ sealed class HomeItem {
 
     data class FeatureBrandSection(val featureBrands: List<FeatureBrand>) : HomeItem()
 
-    data class OfferSection(val offers: List<OfferSmall>) : HomeItem()
+    data class OfferSection(val offers: List<Product>) : HomeItem()
 
-    data class SellerSection(val bestSellers: List<Seller>) : HomeItem()
+    data class SellerSection(val bestSellers: List<Product>) : HomeItem()
 
     data class ProductSection( val tabs: List<Int>,
                                val data: Map<Int, List<Product>>) : HomeItem()
