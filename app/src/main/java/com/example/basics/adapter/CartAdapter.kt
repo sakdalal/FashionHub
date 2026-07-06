@@ -30,7 +30,7 @@ class CartAdapter(private val onMoreClick: (CartEntity) -> Unit): ListAdapter<Ca
             binding.companyName.text=item.brand
             binding.title.text=item.title
             binding.price.text=item.price
-            binding.discountPercentage.text=item.discountPercentage
+            binding.discountPercentage.text="Upto ${item.discountPercentage} Off"
             binding.returnPolicy.text=item.returnPolicy
             Glide.with(binding.root.context)
                 .load(item.thumbnail)

@@ -10,7 +10,7 @@ fun Product.toFeatureBrand(): FeatureBrand {
         description = description,
         // Fields not present in this API
         rating = "4.5",
-        discountPercentage = "0%",
+        discountPercentage = "Upto 0% Off",
         shippingInformation = "Free Delivery",
         availabilityStatus = "In Stock",
         warrantyInformation = "No Warranty",
