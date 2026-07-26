@@ -1,6 +1,5 @@
 package com.example.basics.ui.activity
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -96,12 +95,18 @@ class CartActivity : AppCompatActivity() {
                         binding.totalAmountValue.visibility= View.GONE
                         binding.placeOrder.visibility=View.GONE
                     } else {
+                        Log.d("PRICE_DEBUG", "Entered else block")
                         binding.emptyCartLayout.root.visibility = View.GONE
                         binding.recyclerView.visibility = View.VISIBLE
-                        val totalPrice =
-                            items.sumOf { it.price.replace("$", "").toDoubleOrNull() ?: 0.0 }
+                        val totalPrice = items.sumOf {
+                            val cleanedPrice = it.price.replace(Regex("[^0-9.]"), "")
+                            val value = cleanedPrice.toDoubleOrNull()
+                            Log.d("PRICE_DEBUG", "Original='${it.price}', Cleaned='$cleanedPrice', Parsed=$value")
+                            value ?: 0.0
+                        }
                         binding.mrpValue.text = "₹%.2f".format(totalPrice)
                         binding.totalAmountValue.text = "₹%.2f".format(totalPrice)
+                        Log.d("PRICE_DEBUG", "Total Price = $totalPrice")
                     }
 
                 }

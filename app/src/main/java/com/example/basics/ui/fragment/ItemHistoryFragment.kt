@@ -56,7 +56,7 @@ class ItemHistoryFragment : Fragment() {
 
                 binding.brandText.text = it.brand
                 binding.titleText.text = it.title
-                binding.priceText.text = it.price
+                binding.priceText.text = "Price: ${it.price}"
                 binding.orderIdText.text=it.orderId
                 binding.orderIdValue.text=it.orderId
                 binding.orderOnValue.text=it.date
@@ -69,7 +69,7 @@ class ItemHistoryFragment : Fragment() {
             val orderItems = repository.getItemsByOrderId(orderId)
 
             val totalPrice = orderItems.sumOf {
-                it.price.replace("$", "").toDoubleOrNull() ?: 0.0
+                it.price.replace(Regex("[^0-9.]"), "").toDoubleOrNull() ?: 0.0
             }
 
             binding.totalPriceValue.text="$${totalPrice}"
