@@ -6,6 +6,5 @@ import com.example.basics.model.Product
 interface OnProductClickListener {
     fun onProductClick(product: FeatureBrand)
     fun onWishlistClick(product: FeatureBrand)
-
     fun onOtherProductClick(product: Product)
 }

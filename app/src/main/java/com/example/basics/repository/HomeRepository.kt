@@ -22,7 +22,7 @@ class HomeRepository {
                     discountPercentage = "UpTo ${it.discountPercentage}% Off",
                     thumbnail = it.thumbnail,
                     category = it.category,
-                    price = "$ ${it.price}",
+                    price = it.price,
                     availabilityStatus = it.availabilityStatus,
                     brand = it.brand,
                     shippingInformation = it.shippingInformation,
@@ -40,7 +40,7 @@ class HomeRepository {
                     discountPercentage = "UpTo ${it.discountPercentage}% Off",
                     thumbnail = it.thumbnail,
                     category = it.category,
-                    price = "$ ${it.price}",
+                    price = it.price,
                     availabilityStatus = it.availabilityStatus,
                     brand = it.brand,
                     shippingInformation = it.shippingInformation,
@@ -57,7 +57,7 @@ class HomeRepository {
                     image = it.image,
                     manufacturer = it.manufacturer,
                     name = it.name,
-                    price = "Best Price $${it.price}",
+                    price = it.price,
                     description = it.description
                 )
             },
@@ -68,7 +68,7 @@ class HomeRepository {
                     discountPercentage = "UpTo ${it.discountPercentage}% Off",
                     thumbnail = it.thumbnail,
                     category = it.category,
-                    price = "$ ${it.price}",
+                    price = it.price,
                     availabilityStatus = it.availabilityStatus,
                     brand = it.brand,
                     shippingInformation = it.shippingInformation,
@@ -85,7 +85,7 @@ class HomeRepository {
                     image = it.image,
                     manufacturer = it.manufacturer,
                     name = it.name,
-                    price = "Best Price $${it.price}",
+                    price = it.price,
                     description = it.description
                 )
             },
@@ -95,7 +95,7 @@ class HomeRepository {
                 image = it.image,
                 manufacturer = it.manufacturer,
                 name = it.name,
-                price = "Best Price $${it.price}",
+                price = it.price,
                 description = it.description
             )
             }
