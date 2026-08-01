@@ -83,6 +83,9 @@ class SignupActivity : AppCompatActivity() {
                             "Signup Successful",
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        auth.signOut()
+
                         startActivity(
                             Intent(
                                 this,

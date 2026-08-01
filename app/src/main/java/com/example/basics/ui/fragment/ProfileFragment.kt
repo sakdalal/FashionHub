@@ -1,5 +1,6 @@
 package com.example.basics.ui.fragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -37,13 +38,13 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.shimmerLayout.startShimmer()
-        binding.profileName.visibility = View.GONE
 
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
+        Log.d("PROFILE", "UID = $uid")
 
         FirebaseFirestore.getInstance()
             .collection("users")
@@ -53,13 +54,13 @@ class ProfileFragment : Fragment() {
                 val user = it.toObject(User::class.java)
                 Log.d("PROFILE", "User Name: ${user?.name}")
                 binding.profileName.text = "Hey ${user?.name}!"
+
             }
             .addOnFailureListener {
                 Log.e("PROFILE", "Error", it)
+                binding.profileName.visibility = View.VISIBLE
             }
-        binding.shimmerLayout.stopShimmer()
-        binding.shimmerLayout.visibility = View.GONE
-        binding.profileName.visibility = View.VISIBLE
+
 
         binding.wishlistArrow.setOnClickListener {
             startActivity(Intent(requireContext(), WishlistActivity::class.java))
