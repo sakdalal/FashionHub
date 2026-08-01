@@ -7,9 +7,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import com.example.basics.MyApplication
 import com.example.basics.R
 import com.example.basics.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginActivity : AppCompatActivity() {
 
@@ -47,20 +52,31 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
 
-                Toast.makeText(
-                    this,
-                    "Login Successful",
-                    Toast.LENGTH_SHORT
-                ).show()
+                lifecycleScope.launch {
 
-                startActivity(
-                    Intent(
-                        this,
+                    withContext(Dispatchers.IO) {
+                        (application as MyApplication)
+                            .database
+                            .clearAllTables()
+                    }
+
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "Login Successful",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    val intent = Intent(
+                        this@LoginActivity,
                         MainActivity::class.java
                     )
-                )
 
-                finish()
+                    intent.flags =
+                        Intent.FLAG_ACTIVITY_NEW_TASK or
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                    startActivity(intent)
+                }
             }
             .addOnFailureListener {
 

@@ -20,24 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmerLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toTopOf="@id/orderBox"
-                app:layout_constraintStart_toStartOf="@id/orderBox"
-                app:layout_constraintTop_toTopOf="parent">
-
-            <include layout="@layout/shimmer_profile"/>
-
-            </com.facebook.shimmer.ShimmerFrameLayout>
-
             <TextView
                 android:id="@+id/profileName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Hey Dean!"
+                android:text="Hey User!"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
