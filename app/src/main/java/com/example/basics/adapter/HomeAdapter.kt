@@ -69,7 +69,7 @@ class HomeAdapter(private val listener: OnProductClickListener) :
             3 -> OfferSectionVH(ItemOfferBinding.inflate(inflater, parent, false),listener, sharedPool)
             4 -> SellerSectionVH(ItemBestsellerBinding.inflate(inflater, parent, false),listener, sharedPool)
             5 -> ProductSectionVH(
-                ItemProductSectionBinding.inflate(inflater, parent, false),listener, sharedPool
+                ItemProductSectionBinding.inflate(inflater, parent, false),listener
             )
 
             else -> throw Exception()
@@ -97,7 +97,7 @@ class HomeAdapter(private val listener: OnProductClickListener) :
 
             is SellerSectionVH -> holder.bind((item as HomeItem.SellerSection).bestSellers)
 
-            is ProductSectionVH -> holder.bind(item as HomeItem.ProductSection)
+            is ProductSectionVH -> holder.bind((item as HomeItem.ProductSection),wishlistedIds)
 
 
         }
@@ -110,12 +110,10 @@ class HomeAdapter(private val listener: OnProductClickListener) :
     fun updateWishlist(ids: Set<Int>) {
         wishlistedIds = ids
 
-        val position = currentList.indexOfFirst {
-            it is HomeItem.FeatureBrandSection
-        }
-
-        if (position != -1) {
-            notifyItemChanged(position)
+        currentList.forEachIndexed { index, item ->
+            if(item is HomeItem.FeatureBrandSection || item is HomeItem.ProductSection){
+                notifyItemChanged(index)
+            }
         }
     }
 }

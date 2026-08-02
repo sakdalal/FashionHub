@@ -11,7 +11,7 @@ import com.example.basics.listener.OnProductClickListener
 import com.example.basics.model.HomeItem
 import com.google.android.material.tabs.TabLayout
 
-class ProductSectionVH(private val binding: ItemProductSectionBinding,private val listener: OnProductClickListener , sharedPool: RecyclerView.RecycledViewPool) :
+class ProductSectionVH(private val binding: ItemProductSectionBinding,listener: OnProductClickListener ) :
     RecyclerView.ViewHolder(binding.root) {
     private val adapter = ProductAdapter(listener)
 //    private var tabsInitialized = false
@@ -20,14 +20,14 @@ class ProductSectionVH(private val binding: ItemProductSectionBinding,private va
         binding.productRecycler.layoutManager =
             GridLayoutManager(binding.root.context, 2)
         binding.productRecycler.adapter = adapter
-        binding.productRecycler.setRecycledViewPool(sharedPool)
+//        binding.productRecycler.setRecycledViewPool(sharedPool)
         binding.productRecycler.setHasFixedSize(true)
         binding.productRecycler.setItemViewCacheSize(20)
         binding.productRecycler.isNestedScrollingEnabled = false
     }
-    fun bind(item: HomeItem.ProductSection) {
-        adapter.submitList(item.data[0] ?: emptyList())
-        binding.tabsLayout.removeAllTabs()
+    fun bind(item: HomeItem.ProductSection,wishlistedIds: Set<Int>) {
+        adapter.updateWishlist(wishlistedIds)
+        adapter.submitList(item.data[item.selectedTab] ?: emptyList())
             item.tabs.forEach { imageRes ->
                 val tab = binding.tabsLayout.newTab()
                 val view = LayoutInflater.from(binding.root.context)
@@ -38,6 +38,7 @@ class ProductSectionVH(private val binding: ItemProductSectionBinding,private va
 
                 tab.customView = view
                 binding.tabsLayout.addTab(tab)
+                binding.tabsLayout.getTabAt(item.selectedTab)?.select()
             }
             binding.tabsLayout.clearOnTabSelectedListeners()
             binding.tabsLayout.addOnTabSelectedListener(
@@ -45,7 +46,9 @@ class ProductSectionVH(private val binding: ItemProductSectionBinding,private va
 
                     override fun onTabSelected(tab: TabLayout.Tab) {
                         tab.customView?.alpha = 1f
-                        adapter.submitList(item.data[tab.position] ?: emptyList())
+                        item.selectedTab = tab.position
+                        adapter.updateWishlist(wishlistedIds)
+                        adapter.submitList(item.data[item.selectedTab] ?: emptyList())
                     }
 
                     override fun onTabUnselected(tab: TabLayout.Tab) {
@@ -55,6 +58,7 @@ class ProductSectionVH(private val binding: ItemProductSectionBinding,private va
                     override fun onTabReselected(tab: TabLayout.Tab) {}
                 }
             )
+
 
 
     }
