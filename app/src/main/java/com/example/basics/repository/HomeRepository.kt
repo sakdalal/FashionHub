@@ -85,7 +85,7 @@ class HomeRepository {
                     image = it.image,
                     manufacturer = it.manufacturer,
                     name = it.name,
-                    price = it.price,
+                    price = "$${it.price}",
                     description = it.description
                 )
             },
@@ -95,7 +95,7 @@ class HomeRepository {
                 image = it.image,
                 manufacturer = it.manufacturer,
                 name = it.name,
-                price = it.price,
+                price = "$${it.price}",
                 description = it.description
             )
             }

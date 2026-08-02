@@ -169,6 +169,22 @@ class TagFragment : Fragment(), OnProductClickListener {
 
     }
 
+    override fun onOtherWishlistClick(product: Product) {
+        val featureProduct=product.toFeatureBrand()
+        val item = WishlistEntity(
+            id = featureProduct.id,
+            brand=featureProduct.brand,
+            rating = featureProduct.rating,
+            price = featureProduct.price,
+            discountPercentage = featureProduct.discountPercentage,
+            thumbnail = featureProduct.thumbnail,
+            title = featureProduct.title,
+            returnPolicy = featureProduct.returnPolicy
+        )
+        wishlistViewModel.toggleWishlist(item)
+    }
+
+
     override fun onWishlistClick(product: FeatureBrand) {
             val item = WishlistEntity(
                 id = product.id,
